@@ -3,7 +3,10 @@
 ### Tema 0
 
 - [ ] Nume proiect (îl puteți schimba ulterior)
+- FIFA Pack Opening Simulator
 - [ ] Scurtă descriere a temei alese, ce v-ați propus să implementați
+- Mi-am propus sa implementez un simulator de deschis pachete de fifa.
+- Cand deschidem un pachet sa primim aleatoriu un set de cartonase cu jucatori, steme, manageri. Pe care mai apoi sa le putem vinde sau adauga la colectie posibil.
 
 ## Tema 1
 

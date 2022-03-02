@@ -123,15 +123,15 @@ public:
 
 };
 
-class collection{
-    std::vector<player> players;
-    std::vector<badge> badges;
-    std::vector<manager> managers;
-};
-
-class balance{
-    int bal;
-};
+//class collection{
+//    std::vector<player> players;
+//    std::vector<badge> badges;
+//    std::vector<manager> managers;
+//};
+//
+//class balance{
+//    int bal;
+//};
 
 int main() {
     std::cout << "Inainte de apel constructor\n";

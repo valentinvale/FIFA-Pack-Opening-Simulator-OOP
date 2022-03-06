@@ -252,7 +252,7 @@ int main() {
 //    std::cout << pck.getManager()[0].getName() <<'\n';
 //    std::cout << pl2.getName() <<'\n';
 
-//     std::cout << pl2 << pl;
+     std::cout << pl2 << pl;
      std::cout << pck;
     return 0;
 }

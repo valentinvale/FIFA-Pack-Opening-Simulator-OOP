@@ -247,6 +247,8 @@ int main() {
     steme.push_back(bdg);
     pack pck{1200, 10, jucatori, steme, manageri};
 
+    collection col{jucatori, steme, manageri};
+
 //    std::cout << pck.getManager()[0].getName() <<'\n';
 //    std::cout << pl2.getName() <<'\n';
 

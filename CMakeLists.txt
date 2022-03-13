@@ -70,7 +70,7 @@ endif()
 
 ###############################################################################
 
-target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE efl/random/include)
+target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ext/random/include)
 
 # use SYSTEM so clang-tidy does not report warnings from these directories
 #target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${<SomeLib>_SOURCE_DIR}/include)

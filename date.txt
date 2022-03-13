@@ -1,0 +1,24 @@
+0 Mateiu UCV CM Silver 66 69 80 71 66 50 80
+1 Pigliacelli UCV GK SILVER 66 69 80 71 66 50 80
+2 Lazar UCV GK Silver 66 69 80 71 66 50 80
+3 Rusu UCV GK Bronze 66 69 80 71 66 50 80
+4 Papp UCV CB Silver 66 69 80 71 66 50 80
+5 Gaman UCV CB Silver 66 69 80 71 66 50 80
+6 Constantin UCV CB Silver 66 69 80 71 66 50 80
+7 Screciu UCV CDM Silver 66 69 80 71 66 50 80
+8 Cretu UCV CDM Silver 66 69 80 71 66 50 80
+9 Houri UCV CM Silver 66 69 80 71 66 50 80
+10 Roguljic UCV CAM Silver 66 69 80 71 66 50 80
+11 Bancu UCV LB Silver 66 69 80 71 66 50 80
+12 Vladoiu UCV RB Silver 66 69 80 71 66 50 80
+13 Markovic UCV ST Silver 66 69 80 71 66 50 80
+14 Ivan UCV LW Silver 66 69 80 71 66 50 80
+15 Gustavo UCV RW Silver 66 69 80 71 66 50 80
+16 UCV Silver
+17 FCSB Silver
+18 CFR Silver
+19 Bayern Gold
+20 Reghe Silver Liga1
+21 Becali Bronze Liga1
+22 Stoican Bronze Liga1
+23 Mourinho Gold SerieA

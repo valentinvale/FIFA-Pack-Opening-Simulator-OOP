@@ -181,9 +181,9 @@ public:
     //la fel si pentru manageri si badge-uri
     void sellPlayer(std::vector<player> pulledPlayers, unsigned long long i)
     {
-        if(pulledPlayers[i].getQuality() == "Bronze") this->bal += 300 * pulledPlayers[i].getOvr() / 10;
-            else if(pulledPlayers[i].getQuality() == "Silver") this->bal += 500 * pulledPlayers[i].getOvr() / 10;
-                else this->bal += 1000 * pulledPlayers[i].getOvr() / 10;
+        if(pulledPlayers[i].getQuality() == "Bronze") this->bal += 30 * pulledPlayers[i].getOvr();
+            else if(pulledPlayers[i].getQuality() == "Silver") this->bal += 50 * pulledPlayers[i].getOvr();
+                else this->bal += 100 * pulledPlayers[i].getOvr();
 //        pulledPlayers.erase(pulledPlayers.begin()+i);
     }
 
@@ -385,13 +385,28 @@ std::cout << blnc << '\n';
 std::cout << "Din pachet ai obtinut: " << '\n';
 std::cout << goldPack << '\n';
 
-if(!goldPack.getPlayers().empty()) col.addPlayer(goldPack.getPlayers(), 0);
-if(!goldPack.getManager().empty()) col.addManager(goldPack.getManager(), 0);
-if(!goldPack.getBadges().empty()) blnc.sellBadge(goldPack.getBadges(), 0);
+if(!goldPack.getPlayers().empty())
+{
+    col.addPlayer(goldPack.getPlayers(), 0);
+    if(goldPack.getPlayers().size()>=2) blnc.sellPlayer(goldPack.getPlayers(), 1); //daca avem cel putin 2 jucatori in pachet
+                                                                                                // il vindem pe al doilea
+}
+if(!goldPack.getManager().empty())
+{
+    col.addManager(goldPack.getManager(), 0);
+    if(goldPack.getManager().size()>=2) blnc.sellManager(goldPack.getManager(), 1); //daca avem cel putin 2 manageri in pack
+                                                                                                    // il vindem pe al doilea
+}
+if(!goldPack.getBadges().empty())
+{
+    blnc.sellBadge(goldPack.getBadges(), 0);
+    if(goldPack.getBadges().size()>=2) col.addBadge(goldPack.getBadges(), 1); //daca avem cel putin 2 badge-uri in pack
+                                                                                            // il adaugam in colectie pe al doilea
+}
 
-std::cout << "Colectia ta dupa ce ai adaugat primul jucator si primul manager: \n";
+std::cout << "Colectia ta dupa ce ai adaugat: \n";
 std::cout << col << '\n';
-std::cout << "Cati bani ai dupa ce ai vandut primul badge: \n";
+std::cout << "Cati bani ai dupa ce ai vandut: \n";
 std::cout << blnc << '\n';
 
 

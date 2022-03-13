@@ -2,7 +2,7 @@
 // functia de deschidere pachet
 // functia de adaugat jucatori la colectie
 // functia de vanzare jucatori
-
+//
 #include <iostream>
 #include <fstream>
 #include <vector>

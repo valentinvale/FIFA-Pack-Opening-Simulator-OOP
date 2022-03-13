@@ -162,7 +162,7 @@ class balance{
     int bal;
 
 public:
-    balance(int bal) : bal(bal) {
+    explicit balance(int bal) : bal(bal) {
 //        std::cout << "constructor balance\n";
     }
 

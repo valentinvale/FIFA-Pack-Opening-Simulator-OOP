@@ -30,8 +30,8 @@ void balance::sellBadge(std::vector<badge> pulledBadges, unsigned long long int 
 }
 
 void balance::sellManager(std::vector<manager> pulledManagers, unsigned long long int i) {
-    if(pulledManagers[i].getQuality() == "Bronze") this->bal += 300;
-    else if(pulledManagers[i].getQuality() == "Silver") this->bal += 500;
-    else this->bal += 1000;
+    if(pulledManagers[i].getQuality() == "Bronze") this->bal += 400;
+    else if(pulledManagers[i].getQuality() == "Silver") this->bal += 800;
+    else this->bal += 1500;
 //        pulledManagers.erase(pulledManagers.begin()+i);
 }

@@ -1,0 +1,53 @@
+[33mcommit 92bb1d13bcd8c63b4a73af200adb82a73734fd97[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: mcmarius <m.c.marius@outlook.com>
+Date:   Sun Mar 6 15:29:08 2022 +0200
+
+    Use instrumented libc++
+
+[33mcommit 03a030fb7f9c303e06075a48e8df240aed2f67c3[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: valentinvale <valionsemen@gmail.com>
+Date:   Sun Mar 6 21:10:12 2022 +0200
+
+    incercare nr 2 rezolvare eroare
+
+[33mcommit f8906c70731fe26a82c3a467b44253b0b5f5a9e9[m
+Author: valentinvale <valionsemen@gmail.com>
+Date:   Sun Mar 6 20:58:08 2022 +0200
+
+    test erori de compilare
+
+[33mcommit c2fb5acf758c0f790c03d03e0bd12ccdc4626146[m
+Author: valentinvale <valionsemen@gmail.com>
+Date:   Sun Mar 6 20:53:19 2022 +0200
+
+    implementare partiala a claselor
+
+[33mcommit 0d5756e44127c6919475b039cc4a6c78cd0349e8[m
+Author: valentinvale <valionsemen@gmail.com>
+Date:   Wed Mar 2 10:54:08 2022 +0200
+
+    test rezolvat eroare
+
+[33mcommit 59567a17803b27e64c93fde47ce96170bfb79ed3[m
+Author: valentinvale <valionsemen@gmail.com>
+Date:   Sun Feb 27 02:24:56 2022 +0200
+
+    am inceput sa lucrez la clase
+
+[33mcommit 39ef06886779c7d64259897040eb339ac09ee335[m
+Author: valentinvale <valionsemen@gmail.com>
+Date:   Sat Feb 26 19:25:05 2022 +0200
+
+    Am completat tema 0
+
+[33mcommit 8da3481faf7c1652d8fcd17681baffc05695df00[m
+Author: valentinvale <valionsemen@gmail.com>
+Date:   Tue Feb 15 23:11:33 2022 +0200
+
+    tradus hello world in romana
+
+[33mcommit d9126390b640a8c91d4134c2a1ca9b04e0ca0ca9[m
+Author: valentinvale <92953402+valentinvale@users.noreply.github.com>
+Date:   Tue Feb 15 22:56:02 2022 +0200
+
+    Initial commit

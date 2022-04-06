@@ -13,7 +13,7 @@ player::player(int id_, const std::string &name_, const std::string &team_, cons
 //        std::cout << "constructor de initializare player\n";
 }
 
-player::player() {}
+// player::player() {}
 
 player::player(const player &other) : id{other.id}, name{other.name}, team{other.team}, pos{other.pos}, quality{other.quality},
                                       ovr{other.ovr}, pac{other.pac}, sho{other.sho}, pas{other.pas},

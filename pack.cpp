@@ -43,7 +43,7 @@ void pack::open(balance &blnc, std::vector<player> poolPl, std::vector<badge> po
         for (int i = 0; i < this->nrOfItems; ++i)
         {
             auto val = Random::get(0, 23);
-            if(val >= 0 && val <= 15) this->players.push_back(poolPl[val]);
+            if(val >= 0 && val < 15) this->players.push_back(poolPl[val]);
             else if(val > 15 and val <= 19) this->badges.push_back(poolBdg[val%4]);
             else this->managers.push_back(poolMngr[val%4]);
 

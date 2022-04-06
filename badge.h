@@ -19,7 +19,7 @@ public:
 
     badge(int id_, const std::string& name_, const std::string& quality_);
 
-    badge();
+    //badge();
 
 //    badge(const badge& other) : name{other.name}, quality{other.quality}, id{other.id} {
 //

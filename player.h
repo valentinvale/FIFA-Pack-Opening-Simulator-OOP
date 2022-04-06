@@ -35,7 +35,7 @@ public:
     player(int id_, const std::string& name_, const std::string& team_, const std::string& pos_, const std::string& quality_,
            int ovr_, int pac_, int sho_, int pas_, int dri_, int def_, int phy_);
 
-    player();
+    //player();
 
     player(const player& other);
 

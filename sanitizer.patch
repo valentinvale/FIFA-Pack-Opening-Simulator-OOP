@@ -1,0 +1,137 @@
+From 584bdf6aefadfd09782f28c00d41aed3f226747a Mon Sep 17 00:00:00 2001
+From: mcmarius <m.c.marius@outlook.com>
+Date: Sun, 6 Mar 2022 15:29:08 +0200
+Subject: [PATCH] Use instrumented libc++
+
+---
+ .github/workflows/cmake.yml | 48 +++++++++++++++++++++++++++++--------
+ CMakeLists.txt              | 11 ++++-----
+ 2 files changed, 43 insertions(+), 16 deletions(-)
+
+diff --git a/.github/workflows/cmake.yml b/.github/workflows/cmake.yml
+index 90fb5c4..12363ed 100644
+--- a/.github/workflows/cmake.yml
++++ b/.github/workflows/cmake.yml
+@@ -35,14 +35,14 @@ jobs:
+             # The flag CMAKE_EXPORT_COMPILE_COMMANDS generates compile_commands.json
+             # which is used by cppcheck and clang-tidy
+             cmake_flags: -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+-            # This env runs sanitizers
++            # This env runs cppcheck and sanitizers
+ 
+           - os: ubuntu-20.04
+-            c: clang-10
+-            cxx: clang++-10
+-            name: Ubuntu 20.04 Clang 10
+-            # cmake_flags:
+-            # This env runs sanitizers
++            c: clang-12
++            cxx: clang++-12
++            name: Ubuntu 20.04 Clang 12
++            cmake_flags: -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
++            # This env runs clang-tidy and sanitizers
+ 
+           - os: ubuntu-20.04
+             c: gcc-10
+@@ -93,11 +93,17 @@ jobs:
+       #     sudo apt-get update
+       #     sudo apt-get install ...
+ 
+-      - name: Install clang-tidy
++      - name: Install clang-tidy and libc++ (Linux Clang 12)
++        if: runner.os == 'Linux' && matrix.cxx == 'clang++-12'
++        run: |
++          sudo apt-get update
++          sudo apt-get install clang-tidy libc++-12-dev libc++abi-12-dev
++
++      - name: Install ninja libc++ (Linux Clang 11)
+         if: runner.os == 'Linux' && matrix.cxx == 'clang++-11'
+         run: |
+           sudo apt-get update
+-          sudo apt-get install clang-tidy
++          sudo apt-get install ninja-build libc++-11-dev libc++abi-11-dev
+ 
+       - name: Install valgrind
+         if: runner.os == 'Linux' && matrix.cxx == 'g++-10'
+@@ -111,7 +117,7 @@ jobs:
+         id: cache-tools
+         with:
+           path: tools
+-          key: tools-cppcheck-2.6
++          key: tools-cppcheck-2.6-clang-11
+ 
+       - name: Build tools
+         if: runner.os == 'Linux' && matrix.cxx == 'clang++-11' && steps.cache-tools.outputs.cache-hit != 'true'
+@@ -218,14 +224,36 @@ jobs:
+         run: cppcheck --enable=all --project=build/compile_commands.json -ibuild --suppress='*:build/*' --suppress=missingIncludeSystem --suppress=unmatchedSuppression --error-exitcode=1
+ 
+       - name: Clang-tidy
+-        if: runner.os == 'Linux' && matrix.cxx == 'clang++-11'
++        if: runner.os == 'Linux' && matrix.cxx == 'clang++-12'
+         # config from https://gist.github.com/jfm535/7581ccadbd539303d8bed2f46f973108
+         run: |
++          # clang-tidy is not able to follow symbolic links: https://bugs.llvm.org/show_bug.cgi?id=47460
++          # need to use | as separator because / is used in paths
++          sed -i "s|$(which clang++-12)|$(realpath $(which clang++-12))|g" build/compile_commands.json
++
+           cat build/compile_commands.json |
+             jq -r '.[] | .file' |           # select source file paths from CMake project; -r to strip quotes
+             grep -v "/build/_deps/" |       # ignore external dependencies
+             xargs clang-tidy -p build
+ 
++      - name: Setup memory sanitizer
++        if: runner.os == 'Linux' && matrix.cxx == 'clang++-11' && steps.cache-tools.outputs.cache-hit != 'true'
++        run: |
++          cd tools
++          git clone --depth=1 https://github.com/llvm/llvm-project
++          cd llvm-project
++          mkdir build; cd build
++          sudo ln -s -f /usr/bin/clang-11 /usr/bin/clang
++          sudo ln -s -f /usr/bin/clang++-11 /usr/bin/clang++
++          CC=clang-11 CXX=clang++-11 cmake -GNinja ../llvm \
++            -DCMAKE_BUILD_TYPE=Release \
++            -DLLVM_ENABLE_PROJECTS="libcxx;libcxxabi" \
++            -DCMAKE_C_COMPILER=clang \
++            -DCMAKE_CXX_COMPILER=clang++ \
++            -DLLVM_USE_SANITIZER=MemoryWithOrigins \
++            -DCMAKE_BUILD_WITH_INSTALL_RPATH=true
++          cmake --build . -j6 -- cxx cxxabi
++
+       - name: Sanitizers
+         # run one sanitizer for each OS to avoid building extra binaries;
+         # memory on Linux clang, address on macOS clang
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b6d1d4b..a65e12e 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -36,10 +36,9 @@ else()
+     target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -pedantic -Werror)
+ 
+     if("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
+-    elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+-        target_compile_options(${PROJECT_NAME} PRIVATE -stdlib=libstdc++)
+-    elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
++    elseif("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
+         target_compile_options(${PROJECT_NAME} PRIVATE -stdlib=libc++)
++        target_link_options(${PROJECT_NAME} PRIVATE -stdlib=libc++)
+     endif()
+ endif()
+ 
+@@ -57,14 +56,14 @@ elseif(UNIX)
+     if("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
+         # we cannot mix sanitizers with Valgrind
+     elseif("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
+-        if("${CMAKE_CXX_COMPILER_VERSION}" MATCHES "10.")
++        if("${CMAKE_CXX_COMPILER_VERSION}" MATCHES "12.")
+             # check leaks on Linux since macOS does not support the leaks sanitizer yet
+             # leaks sanitizer is enabled by default on Linux, so we do not need to enable it explicitly
+             target_compile_options(${PROJECT_NAME} PRIVATE -fsanitize=address,undefined)
+             target_link_options(${PROJECT_NAME} PRIVATE -fsanitize=address,undefined)
+         else()
+-            target_compile_options(${PROJECT_NAME} PRIVATE -fsanitize=memory,undefined)
+-            target_link_options(${PROJECT_NAME} PRIVATE -fsanitize=memory,undefined)
++            target_compile_options(${PROJECT_NAME} PRIVATE -fsanitize=memory,undefined -fsanitize-memory-track-origins)
++            target_link_options(${PROJECT_NAME} PRIVATE -fsanitize=memory,undefined -fsanitize-memory-track-origins -Wl,-rpath,tools/llvm-project/build/lib)
+         endif()
+     endif()
+ endif()

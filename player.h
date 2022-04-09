@@ -5,7 +5,7 @@
 
 
 class player {
-    int id;
+    int id = 0;
     std::string name;
     std::string team;
     std::string pos;

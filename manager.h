@@ -7,7 +7,7 @@
 
 
 class manager{
-    int id;
+    int id = 0;
     std::string name;
     std::string quality;
     std::string league;

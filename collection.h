@@ -24,11 +24,11 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const collection& collection);
 
     //metode pentru adaugat la colectie
-    void addPlayer(std::vector<player> pulledPlayers, unsigned long long i);
+    void addPlayer(const player& pulledPlayer);
 
-    void addBadge(std::vector<badge> pulledBadges, unsigned long long i);
+    void addBadge(const badge& pulledBadge);
 
-    void addManager(std::vector<manager> pulledManagers, unsigned long long i);
+    void addManager(const manager& pulledManager);
 
 };
 

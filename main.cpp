@@ -67,20 +67,20 @@ std::cout << goldPack << '\n';
 
 if(!goldPack.getPlayers().empty())
 {
-    col.addPlayer(goldPack.getPlayers(), 0);
-    if(goldPack.getPlayers().size()>=2) blnc.sellPlayer(goldPack.getPlayers(), 1); //daca avem cel putin 2 jucatori in pachet
+    col.addPlayer(goldPack.getPlayers()[0]);
+    if(goldPack.getPlayers().size()>=2) blnc.sellPlayer(goldPack.getPlayers()[1]); //daca avem cel putin 2 jucatori in pachet
                                                                                                 // il vindem pe al doilea
 }
 if(!goldPack.getManager().empty())
 {
-    col.addManager(goldPack.getManager(), 0);
-    if(goldPack.getManager().size()>=2) blnc.sellManager(goldPack.getManager(), 1); //daca avem cel putin 2 manageri in pack
+    col.addManager(goldPack.getManager()[0]);
+    if(goldPack.getManager().size()>=2) blnc.sellManager(goldPack.getManager()[1]); //daca avem cel putin 2 manageri in pack
                                                                                                     // il vindem pe al doilea
 }
 if(!goldPack.getBadges().empty())
 {
-    blnc.sellBadge(goldPack.getBadges(), 0);
-    if(goldPack.getBadges().size()>=2) col.addBadge(goldPack.getBadges(), 1); //daca avem cel putin 2 badge-uri in pack
+    blnc.sellBadge(goldPack.getBadges()[0]);
+    if(goldPack.getBadges().size()>=2) col.addBadge(goldPack.getBadges()[1]); //daca avem cel putin 2 badge-uri in pack
                                                                                             // il adaugam in colectie pe al doilea
 }
 

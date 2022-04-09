@@ -31,17 +31,17 @@ std::ostream &operator<<(std::ostream &os, const collection &collection) {
     return os;
 }
 
-void collection::addPlayer(std::vector<player> pulledPlayers, unsigned long long int i) {
-    this->players.push_back(pulledPlayers[i]);
+void collection::addPlayer(const player& pulledPlayer) {
+    this->players.push_back(pulledPlayer);
 //        pulledPlayers.erase(pulledPlayers.begin()+i);
 }
 
-void collection::addBadge(std::vector<badge> pulledBadges, unsigned long long int i) {
-    this->badges.push_back(pulledBadges[i]);
+void collection::addBadge(const badge& pulledBadge) {
+    this->badges.push_back(pulledBadge);
 //        pulledBadges.erase(pulledBadges.begin()+i);
 }
 
-void collection::addManager(std::vector<manager> pulledManagers, unsigned long long int i) {
-    this->managers.push_back(pulledManagers[i]);
+void collection::addManager(const manager& pulledManager) {
+    this->managers.push_back(pulledManager);
 //        pulledManagers.erase(pulledManagers.begin()+i);
 }

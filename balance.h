@@ -21,11 +21,11 @@ public:
 
     //Metoda pentru vindere de jucator, luam jucatorul de pe pozitia i din vectorul de jucatori obtinuti din pachet
     //la fel si pentru manageri si badge-uri
-    void sellPlayer(std::vector<player> pulledPlayers, unsigned long long i);
+    void sellPlayer(const player& pulledPlayer);
 
-    void sellBadge(std::vector<badge> pulledBadges, unsigned long long i);
+    void sellBadge(const badge& pulledBadge);
 
-    void sellManager(std::vector<manager> pulledManagers, unsigned long long i);
+    void sellManager(const manager& pulledManager);
 
 };
 

@@ -23,20 +23,8 @@ std::ifstream fin("date.txt");
 int nrOfPlayers = 16;
 int nrOfBadges = 4;
 int nrOfManagers = 4;
-int id;
-int ovr;
-int pac;
-int sho;
-int pas;
-int dri;
-int def;
-int phy;
-int div;
-int han;
-int kic;
-int ref;
-int spe;
-int posi;
+int id, ovr, pac, sho, pas, dri, def, phy, div, han, kic, ref, spe, posi;
+
 std::string playerName, playerTeam, playerPosition, playerQuality, badgeQuality, managerQuality, badgeName, managerName, managerLeague;
 std::vector<std::shared_ptr<player>> playersPool;
 std::vector<badge> badgesPool;
@@ -86,7 +74,7 @@ std::cout << goldPack << '\n';
 
 if(!goldPack.getPlayers().empty())
 {
-    col.addPlayer(goldPack.getPlayers()[0]);
+    col.addPlayer(goldPack.getPlayers()[0]); //aici cred ca trebuie make_shared
     if(goldPack.getPlayers().size()>=2) blnc.sellPlayer((const player &) goldPack.getPlayers()[1]); //daca avem cel putin 2 jucatori in pachet
                                                                                                 // il vindem pe al doilea
 }

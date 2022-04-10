@@ -21,6 +21,8 @@ public:
     goalkeeper(int id, const std::string &name, const std::string &team, const std::string &pos,
                const std::string &quality, int ovr, int div, int han, int kic, int ref, int spe, int posi);
 
+    void afis(std::ostream& os) const override;
+
     friend std::ostream &operator<<(std::ostream &os, const goalkeeper &goalkeeper);
 };
 

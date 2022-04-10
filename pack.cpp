@@ -19,7 +19,7 @@ std::ostream &operator<<(std::ostream &os, const pack &pack) {
     os << "players:\n";
 
     for (const auto & player : pack.players) {
-        os << player;
+        os << *player;
         os << '\n';
     }
 

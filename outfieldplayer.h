@@ -21,6 +21,8 @@ public:
     outfieldplayer(int id, const std::string &name, const std::string &team, const std::string &pos,
                    const std::string &quality, int ovr, int pac, int sho, int pas, int dri, int def, int phy);
 
+    void afis(std::ostream &os) const override;
+
     friend std::ostream &operator<<(std::ostream &os, const outfieldplayer &outfieldplayer);
 
 };

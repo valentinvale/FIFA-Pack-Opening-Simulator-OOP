@@ -14,7 +14,7 @@ std::ostream &operator<<(std::ostream &os, const collection &collection) {
     os << "players:\n";
 
     for (const auto & player : collection.players) {
-        os << player;
+        os << *player;
         os << '\n';
     }
 

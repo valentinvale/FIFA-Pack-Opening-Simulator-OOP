@@ -9,9 +9,14 @@ goalkeeper::goalkeeper(int id, const std::string &name, const std::string &team,
         : player(id, name, team, pos, quality, ovr), div(div), han(han), kic(kic), ref(ref), spe(spe), posi(posi) {}
 
 std::ostream &operator<<(std::ostream &os, const goalkeeper &goalkeeper) {
-    os << static_cast<const player &>(goalkeeper) << " div: " << goalkeeper.div << " han: " << goalkeeper.han
-       << " kic: " << goalkeeper.kic << " ref: " << goalkeeper.ref << " spe: " << goalkeeper.spe << " posi: "
-       << goalkeeper.posi;
+    goalkeeper.afis(os);
     return os;
+}
+
+void goalkeeper::afis(std::ostream &os) const {
+    player::afis(os);
+    os <<" div: " << this->div << " han: " << this->han
+       << " kic: " << this->kic << " ref: " << this->ref << " spe: " << this->spe << " posi: "
+       << this->posi << '\n';
 }
 

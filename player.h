@@ -17,7 +17,7 @@ protected:
 public:
 //    const std::string& getName() const;
 //    const std::string& getTeam() const;
-    const std::string& getPos() const;
+    [[maybe_unused]] const std::string& getPos() const;
     const std::string& getQuality() const;
 //    int getId() const;
     int getOvr() const;
@@ -27,6 +27,8 @@ public:
 //    int getDri() const;
 //    int getDef() const;
 //    int getPhy() const;
+
+    virtual void afis(std::ostream &os) const;
 
     player(int id_, const std::string& name_, const std::string& team_, const std::string& pos_, const std::string& quality_,
            int ovr_);

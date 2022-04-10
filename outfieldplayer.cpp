@@ -10,10 +10,15 @@ outfieldplayer::outfieldplayer(int id, const std::string &name, const std::strin
                                           dri(dri), def(def), phy(phy) {}
 
 std::ostream &operator<<(std::ostream &os, const outfieldplayer &outfieldplayer) {
-    os << static_cast<const player &>(outfieldplayer) << " pac: " << outfieldplayer.pac << " sho: "
-       << outfieldplayer.sho << " pas: " << outfieldplayer.pas << " dri: " << outfieldplayer.dri << " def: "
-       << outfieldplayer.def << " phy: " << outfieldplayer.phy;
+    outfieldplayer.afis(os);
     return os;
+}
+
+void outfieldplayer::afis(std::ostream &os) const {
+    player::afis(os);
+    os << " pac: " << this->pac << " sho: "
+       << this->sho << " pas: " << this->pas << " dri: " << this->dri << " def: "
+       << this->def << " phy: " << this->phy << '\n';
 }
 
 

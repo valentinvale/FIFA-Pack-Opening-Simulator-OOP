@@ -34,9 +34,9 @@ player &player::operator=(const player &other) {
     return *this;
 }
 
+
 std::ostream &operator<<(std::ostream &os, const player &pl) {
-    os << "name: " << pl.name << " team: " << pl.team << " pos: " << pl.pos << " quality: "
-       << pl.quality << " id: " << pl.id << " ovr: " << pl.ovr <<'\n';
+    pl.afis(os);
     return os;
 }
 
@@ -52,7 +52,7 @@ int player::getOvr() const {return ovr; }
 //
 //const std::string &player::getTeam() const {return team; }
 //
-const std::string &player::getPos() const {return pos; }
+[[maybe_unused]] [[maybe_unused]]const std::string &player::getPos() const {return pos; }
 //
 //int player::getId() const {return id; }
 //

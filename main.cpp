@@ -14,6 +14,8 @@
 #include "balance.h"
 #include "pack.h"
 #include "collection.h"
+#include "goalkeeper.h"
+#include "outfieldplayer.h"
 
 int main() {
 
@@ -29,15 +31,32 @@ int pas;
 int dri;
 int def;
 int phy;
+int div;
+int han;
+int kic;
+int ref;
+int spe;
+int posi;
 std::string playerName, playerTeam, playerPosition, playerQuality, badgeQuality, managerQuality, badgeName, managerName, managerLeague;
-std::vector<player> playersPool;
+std::vector<std::shared_ptr<player>> playersPool;
 std::vector<badge> badgesPool;
 std::vector<manager> managersPool;
 
     for (int i = 0; i < nrOfPlayers; ++i) {
-        fin >> id >> playerName >> playerTeam >> playerPosition >> playerQuality >> ovr >> pac >> sho >> pas >> dri >> def >> phy;
-        player pl{id, playerName, playerTeam, playerPosition, playerQuality, ovr, pac, sho, pas, dri, def, phy};
-        playersPool.push_back(pl);
+        fin >> id >> playerName >> playerTeam >> playerPosition >> playerQuality >> ovr;
+        if (playerPosition == "GK")
+        {
+            fin >> div >> han >> kic >> ref >> spe >> posi;
+            goalkeeper gkp{id, playerName, playerTeam, playerPosition, playerQuality, ovr, div, han, kic, ref, spe, posi};
+            playersPool.push_back(std::make_shared<goalkeeper>(gkp));
+        }
+        else
+        {
+            fin >> pac >> sho >> pas >> dri >> def >> phy;
+            outfieldplayer ofp{id, playerName, playerTeam, playerPosition, playerQuality, ovr, pac, sho, pas, dri, def, phy};
+            playersPool.push_back(std::make_shared<outfieldplayer>(ofp));
+        }
+
     }
 
     for (int i = 0; i < nrOfBadges; ++i) {
@@ -52,7 +71,7 @@ std::vector<manager> managersPool;
         managersPool.push_back(mngr);
     }
 
-std::vector<player> emptyPlayers;
+std::vector<std::shared_ptr<player>> emptyPlayers;
 std::vector<badge> emptyBadges;
 std::vector<manager> emptyManagers;
 
@@ -68,7 +87,7 @@ std::cout << goldPack << '\n';
 if(!goldPack.getPlayers().empty())
 {
     col.addPlayer(goldPack.getPlayers()[0]);
-    if(goldPack.getPlayers().size()>=2) blnc.sellPlayer(goldPack.getPlayers()[1]); //daca avem cel putin 2 jucatori in pachet
+    if(goldPack.getPlayers().size()>=2) blnc.sellPlayer((const player &) goldPack.getPlayers()[1]); //daca avem cel putin 2 jucatori in pachet
                                                                                                 // il vindem pe al doilea
 }
 if(!goldPack.getManager().empty())

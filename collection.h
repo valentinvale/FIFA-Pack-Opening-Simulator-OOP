@@ -1,6 +1,8 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <utility>
+#include <memory>
 
 #include "player.h"
 #include "badge.h"
@@ -12,19 +14,19 @@
 
 
 class collection{
-    std::vector<player> players;
+    std::vector<std::shared_ptr <player>> players;
     std::vector<badge> badges;
     std::vector<manager> managers;
 
 public:
-    collection(const std::vector<player>& players_, const std::vector<badge>& badges_,
+    collection(const std::vector<std::shared_ptr <player>>& players_, const std::vector<badge>& badges_,
                const std::vector<manager>& managers_);
 
 
     friend std::ostream& operator<<(std::ostream& os, const collection& collection);
 
     //metode pentru adaugat la colectie
-    void addPlayer(const player& pulledPlayer);
+    void addPlayer(std::shared_ptr<player> pulledPlayer);
 
     void addBadge(const badge& pulledBadge);
 

@@ -4,7 +4,7 @@
 
 #include "collection.h"
 
-collection::collection(const std::vector<player> &players_, const std::vector<badge> &badges_,
+collection::collection(const std::vector<std::shared_ptr <player>> &players_, const std::vector<badge> &badges_,
                        const std::vector<manager> &managers_) : players{players_}, badges{badges_}, managers{managers_} {
 
 //        std::cout << "constructor de initializare collection\n";
@@ -31,7 +31,7 @@ std::ostream &operator<<(std::ostream &os, const collection &collection) {
     return os;
 }
 
-void collection::addPlayer(const player& pulledPlayer) {
+void collection::addPlayer(std::shared_ptr<player> pulledPlayer) {
     this->players.push_back(pulledPlayer);
 //        pulledPlayers.erase(pulledPlayers.begin()+i);
 }

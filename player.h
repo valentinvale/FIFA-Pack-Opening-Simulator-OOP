@@ -1,27 +1,23 @@
-
+#include <string>
 
 #ifndef OOP_PLAYER_H
 #define OOP_PLAYER_H
 
 
 class player {
+
+protected:
     int id = 0;
     std::string name;
     std::string team;
     std::string pos;
     std::string quality;
     int ovr;
-    int pac;
-    int sho;
-    int pas;
-    int dri;
-    int def;
-    int phy;
 
 public:
 //    const std::string& getName() const;
 //    const std::string& getTeam() const;
-//    const std::string& getPos() const;
+    const std::string& getPos() const;
     const std::string& getQuality() const;
 //    int getId() const;
     int getOvr() const;
@@ -33,7 +29,7 @@ public:
 //    int getPhy() const;
 
     player(int id_, const std::string& name_, const std::string& team_, const std::string& pos_, const std::string& quality_,
-           int ovr_, int pac_, int sho_, int pas_, int dri_, int def_, int phy_);
+           int ovr_);
 
     //player();
 

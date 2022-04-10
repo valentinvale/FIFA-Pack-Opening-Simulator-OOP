@@ -1,13 +1,13 @@
 
 #include "pack.h"
 
-const std::vector<player> &pack::getPlayers() const {return players; }
+const std::vector<std::shared_ptr <player>> &pack::getPlayers() const {return players; }
 
 const std::vector<badge> &pack::getBadges() const {return badges; }
 
 const std::vector<manager> &pack::getManager() const {return managers; }
 
-pack::pack(int price_, int nrOfItems_, const std::vector<player> &players_, const std::vector<badge> &badges_,
+pack::pack(int price_, int nrOfItems_, const std::vector<std::shared_ptr <player>> &players_, const std::vector<badge> &badges_,
            const std::vector<manager> &managers_) : price{price_}, nrOfItems{nrOfItems_}, players{players_},
                                                     badges{badges_}, managers{managers_} {
 
@@ -36,7 +36,7 @@ std::ostream &operator<<(std::ostream &os, const pack &pack) {
     return os;
 }
 
-void pack::open(balance &blnc, std::vector<player> poolPl, std::vector<badge> poolBdg, std::vector<manager> poolMngr) {
+void pack::open(balance &blnc, std::vector<std::shared_ptr <player>> poolPl, std::vector<badge> poolBdg, std::vector<manager> poolMngr) {
     //daca ne ajung banii
     if(blnc.pay(price))
     {

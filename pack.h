@@ -43,6 +43,8 @@ public:
     //metoda deschidere pachet
     void open(balance &blnc, std::vector<std::shared_ptr<player>> poolPl, std::vector<badge> poolBdg, std::vector<manager> poolMngr);
 
+    void clearPack();
+
 };
 
 

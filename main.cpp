@@ -65,36 +65,63 @@ std::vector<manager> emptyManagers;
 
 collection col{emptyPlayers, emptyBadges, emptyManagers};
 balance blnc{100000};
-pack goldPack{1000, 7, emptyPlayers, emptyBadges, emptyManagers};
-goldPack.open(blnc, playersPool, badgesPool, managersPool);
-std::cout << "Ai mai ramas cu atatia bani: " << '\n';
-std::cout << blnc << '\n';
-std::cout << "Din pachet ai obtinut: " << '\n';
-std::cout << goldPack << '\n';
+//pack goldPack{1000, 7, emptyPlayers, emptyBadges, emptyManagers};
+//goldPack.open(blnc, playersPool, badgesPool, managersPool);
+//std::cout << "Ai mai ramas cu atatia bani: " << '\n';
+//std::cout << blnc << '\n';
+//std::cout << "Din pachet ai obtinut: " << '\n';
+//std::cout << goldPack << '\n';
+//
+//if(!goldPack.getPlayers().empty())
+//{
+//    col.addPlayer(goldPack.getPlayers()[0]); //aici cred ca trebuie make_shared
+//    if(goldPack.getPlayers().size()>=2) blnc.sellPlayer( goldPack.getPlayers()[1]); //daca avem cel putin 2 jucatori in pachet
+//                                                                                                // il vindem pe al doilea
+//}
+//if(!goldPack.getManager().empty())
+//{
+//    col.addManager(goldPack.getManager()[0]);
+//    if(goldPack.getManager().size()>=2) blnc.sellManager(goldPack.getManager()[1]); //daca avem cel putin 2 manageri in pack
+//                                                                                                    // il vindem pe al doilea
+//}
+//if(!goldPack.getBadges().empty())
+//{
+//    blnc.sellBadge(goldPack.getBadges()[0]);
+//    if(goldPack.getBadges().size()>=2) col.addBadge(goldPack.getBadges()[1]); //daca avem cel putin 2 badge-uri in pack
+//                                                                                            // il adaugam in colectie pe al doilea
+//}
+//
+//std::cout << "Colectia ta dupa ce ai adaugat: \n";
+//std::cout << col << '\n';
+//std::cout << "Cati bani ai dupa ce ai vandut: \n";
+//std::cout << blnc << '\n';
 
-if(!goldPack.getPlayers().empty())
+    unsigned int input;
+    pack goldPack{1000, 7, emptyPlayers, emptyBadges, emptyManagers};
+do
 {
-    col.addPlayer(goldPack.getPlayers()[0]); //aici cred ca trebuie make_shared
-    if(goldPack.getPlayers().size()>=2) blnc.sellPlayer( goldPack.getPlayers()[1]); //daca avem cel putin 2 jucatori in pachet
-                                                                                                // il vindem pe al doilea
-}
-if(!goldPack.getManager().empty())
-{
-    col.addManager(goldPack.getManager()[0]);
-    if(goldPack.getManager().size()>=2) blnc.sellManager(goldPack.getManager()[1]); //daca avem cel putin 2 manageri in pack
-                                                                                                    // il vindem pe al doilea
-}
-if(!goldPack.getBadges().empty())
-{
-    blnc.sellBadge(goldPack.getBadges()[0]);
-    if(goldPack.getBadges().size()>=2) col.addBadge(goldPack.getBadges()[1]); //daca avem cel putin 2 badge-uri in pack
-                                                                                            // il adaugam in colectie pe al doilea
-}
+    system("cls");
+    std::cout << "Balance: " << blnc << '\n';
+    std::cout << "Apasa tasta corespunzatoare pentru a dschide pachetul dorit" << '\n';
+    std::cout << "Apasa tasta 9 pentru a vedea colectia" << '\n';
+    std::cout << "Apasa tasta 0 pentru a iesi" << '\n';
+    std::cout << "1. Gold Pack - 7 iteme diverse" << '\n';
+    std::cin >> input;
 
-std::cout << "Colectia ta dupa ce ai adaugat: \n";
-std::cout << col << '\n';
-std::cout << "Cati bani ai dupa ce ai vandut: \n";
-std::cout << blnc << '\n';
+    if (input == 9) std::cout << col << '\n';
+    else if (input == 1)
+    {
+
+        goldPack.open(blnc, playersPool, badgesPool, managersPool);
+        std::cout << "Ai mai ramas cu atatia bani: " << '\n';
+        std::cout << blnc << '\n';
+        std::cout << "Din pachet ai obtinut: " << '\n';
+        std::cout << goldPack << '\n';
+        goldPack.clearPack();
+        system("pause");
+    }
+
+}while(input != 0);
 
     return 0;
 }

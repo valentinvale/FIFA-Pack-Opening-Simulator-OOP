@@ -54,3 +54,9 @@ void pack::open(balance &blnc, std::vector<std::shared_ptr <player>> poolPl, std
     else std::cout << "Nu s-a putut deschide pachetul\n";
 
 }
+
+void pack::clearPack() {
+    this->players.clear();
+    this->managers.clear();
+    this->badges.clear();
+}

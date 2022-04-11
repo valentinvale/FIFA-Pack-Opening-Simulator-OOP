@@ -17,7 +17,9 @@ using Random = effolkronium::random_static;
 
 class pack{
     int price;
-    int nrOfItems;
+    int nrOfPlayers;
+    int nrOfBadges;
+    int nrOfManagers;
     std::vector<std::shared_ptr<player>> players;
     std::vector<badge> badges;
     std::vector<manager> managers;
@@ -27,9 +29,17 @@ public:
 //    int getnrOfItems() const {return price; }
     const std::vector<std::shared_ptr <player>>& getPlayers() const;
     const std::vector<badge>& getBadges() const;
-    const std::vector<manager>& getManager() const;
+    const std::vector<manager>& getManagers() const;
 
-    pack(int price_, int nrOfItems_, const std::vector<std::shared_ptr <player>>& players_, const std::vector<badge>& badges_,
+    int getPrice() const;
+
+    int getNrOfPlayers() const;
+
+    int getNrOfBadges() const;
+
+    int getNrOfManagers() const;
+
+    pack(int price_, int nrOfPlayers_, int nrOfBadges_, int nrOfManagers_, const std::vector<std::shared_ptr <player>>& players_, const std::vector<badge>& badges_,
          const std::vector<manager>& managers_);
 
 //    pack(pack& other) : price{other.price}, nrOfItems{other.nrOfItems}, players{other.players},
@@ -44,6 +54,10 @@ public:
     void open(balance &blnc, std::vector<std::shared_ptr<player>> poolPl, std::vector<badge> poolBdg, std::vector<manager> poolMngr);
 
     void clearPack();
+
+    void popPlayer(int i);
+    void popBadge(int i);
+    void popManager(int i);
 
 };
 

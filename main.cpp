@@ -96,28 +96,117 @@ balance blnc{100000};
 //std::cout << "Cati bani ai dupa ce ai vandut: \n";
 //std::cout << blnc << '\n';
 
-    unsigned int input;
-    pack goldPack{1000, 7, emptyPlayers, emptyBadges, emptyManagers};
+    int input, inputSellAddAll, nrOrdine, decizie;
+    pack goldPack{1000, 5, 1, 1, emptyPlayers, emptyBadges, emptyManagers};
 do
 {
     system("cls");
-    std::cout << "Balance: " << blnc << '\n';
-    std::cout << "Apasa tasta corespunzatoare pentru a dschide pachetul dorit" << '\n';
-    std::cout << "Apasa tasta 9 pentru a vedea colectia" << '\n';
-    std::cout << "Apasa tasta 0 pentru a iesi" << '\n';
-    std::cout << "1. Gold Pack - 7 iteme diverse" << '\n';
+    std::cout << "Balance: " << blnc << '\n' << '\n';
+    std::cout << "Apasa tasta corespunzatoare pentru a dschide pachetul dorit" << '\n' << '\n';
+    std::cout << "Apasa tasta 9 pentru a vedea colectia" << '\n' << '\n';
+    std::cout << "Apasa tasta 0 pentru a iesi" << '\n' << '\n';
+    std::cout << "1. Gold Pack - 7 iteme diverse - pret: " << goldPack.getPrice() << '\n' << '\n';
     std::cin >> input;
 
-    if (input == 9) std::cout << col << '\n';
+    if (input == 9)
+    {
+        std::cout << col << '\n';
+        system("pause");
+    }
     else if (input == 1)
     {
-
+        system("cls");
         goldPack.open(blnc, playersPool, badgesPool, managersPool);
         std::cout << "Ai mai ramas cu atatia bani: " << '\n';
-        std::cout << blnc << '\n';
+        std::cout << blnc << '\n' << '\n';
         std::cout << "Din pachet ai obtinut: " << '\n';
-        std::cout << goldPack << '\n';
-        goldPack.clearPack();
+
+        do {
+            system("cls");
+            std::cout << goldPack << '\n' << '\n';
+            std::cout << "Apasa tasta 1 pentru a vinde toate itemele" << '\n' << '\n';
+            std::cout << "Apasa tasta 2 pentru a adauga toate itemele la colectie" << '\n' << '\n';
+            std::cout
+                    << "Apasa tasta 3, introdu numarul de ordine al item-ului si cifra 1 sau 2 pentru a-l vinde, respectiv a-l adauga la colectie"
+                    << '\n' << '\n';
+            std::cin >> inputSellAddAll;
+            if (inputSellAddAll == 1)
+            {
+                for (unsigned long long i = 0; i < goldPack.getPlayers().size(); ++i) {
+                    blnc.sellPlayer(goldPack.getPlayers()[i]);
+                }
+
+                for (unsigned long long i = 0; i < goldPack.getBadges().size(); ++i) {
+                    blnc.sellBadge(goldPack.getBadges()[i]);
+                }
+
+                for (unsigned long long i = 0; i < goldPack.getManagers().size(); ++i) {
+                    blnc.sellManager(goldPack.getManagers()[i]);
+                }
+
+                goldPack.clearPack();
+
+            }
+            else if (inputSellAddAll == 2) {
+                for (unsigned long long i = 0; i < goldPack.getPlayers().size(); ++i) {
+                    col.addPlayer(goldPack.getPlayers()[i]);
+                }
+
+                for (unsigned long long i = 0; i < goldPack.getBadges().size(); ++i) {
+                    col.addBadge(goldPack.getBadges()[i]);
+                }
+
+                for (unsigned long long i = 0; i < goldPack.getManagers().size(); ++i) {
+                    col.addManager(goldPack.getManagers()[i]);
+                }
+
+                goldPack.clearPack();
+
+            }
+            else if (inputSellAddAll == 3)
+            {
+                std::cin >> nrOrdine >> decizie;
+                if (decizie == 1)
+                {
+                    if (nrOrdine >= 1 && nrOrdine <= goldPack.getNrOfPlayers())
+                    {
+                        blnc.sellPlayer(goldPack.getPlayers()[nrOrdine - 1]);
+                        goldPack.popPlayer(nrOrdine - 1);
+                    }
+                    else if (nrOrdine > goldPack.getNrOfPlayers() &&
+                               nrOrdine <= goldPack.getNrOfPlayers() + goldPack.getNrOfBadges())
+                    {
+                        blnc.sellBadge(goldPack.getBadges()[nrOrdine - goldPack.getNrOfPlayers() - 1]);
+                        goldPack.popBadge(nrOrdine - goldPack.getNrOfPlayers() - 1);
+                    }
+                    else if (nrOrdine > goldPack.getNrOfPlayers() + goldPack.getNrOfBadges() &&
+                               nrOrdine <= goldPack.getNrOfPlayers() + goldPack.getNrOfBadges() + goldPack.getNrOfManagers())
+                    {
+                        blnc.sellManager(goldPack.getManagers()[nrOrdine - goldPack.getNrOfPlayers() - goldPack.getNrOfBadges()-1]);
+                        goldPack.popBadge(nrOrdine - goldPack.getNrOfPlayers() - goldPack.getNrOfBadges() - 1);
+                    }
+                }
+                else if ( decizie == 2)
+                {
+                    if (nrOrdine >= 1 && nrOrdine <= goldPack.getNrOfPlayers())
+                    {
+                        col.addPlayer(goldPack.getPlayers()[nrOrdine - 1]);
+                        goldPack.popPlayer(nrOrdine - 1);
+                    }
+                    else if (nrOrdine > goldPack.getNrOfPlayers() && nrOrdine <= goldPack.getNrOfPlayers() + goldPack.getNrOfBadges())
+                    {
+                        col.addBadge(goldPack.getBadges()[nrOrdine - goldPack.getNrOfPlayers() - 1]);
+                        goldPack.popBadge(nrOrdine - goldPack.getNrOfPlayers() - 1);
+                    }
+                    else if (nrOrdine > goldPack.getNrOfPlayers() + goldPack.getNrOfBadges() &&
+                               nrOrdine <= goldPack.getNrOfPlayers() + goldPack.getNrOfBadges() + goldPack.getNrOfManagers())
+                    {
+                        col.addManager(goldPack.getManagers()[nrOrdine - goldPack.getNrOfPlayers() - goldPack.getNrOfBadges()-1]);
+                        goldPack.popBadge(nrOrdine - goldPack.getNrOfPlayers() - goldPack.getNrOfBadges() - 1);
+                    }
+                }
+            }
+        }while(!goldPack.getPlayers().empty() || !goldPack.getBadges().empty() || !goldPack.getManagers().empty());
         system("pause");
     }
 

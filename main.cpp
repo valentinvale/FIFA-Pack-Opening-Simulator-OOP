@@ -75,7 +75,7 @@ std::cout << goldPack << '\n';
 if(!goldPack.getPlayers().empty())
 {
     col.addPlayer(goldPack.getPlayers()[0]); //aici cred ca trebuie make_shared
-    if(goldPack.getPlayers().size()>=2) blnc.sellPlayer((const player &) goldPack.getPlayers()[1]); //daca avem cel putin 2 jucatori in pachet
+    if(goldPack.getPlayers().size()>=2) blnc.sellPlayer( goldPack.getPlayers()[1]); //daca avem cel putin 2 jucatori in pachet
                                                                                                 // il vindem pe al doilea
 }
 if(!goldPack.getManager().empty())

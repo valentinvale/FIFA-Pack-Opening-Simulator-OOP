@@ -1,6 +1,8 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <memory>
+#include <utility>
 
 #include "player.h"
 #include "badge.h"
@@ -21,7 +23,7 @@ public:
 
     //Metoda pentru vindere de jucator, luam jucatorul de pe pozitia i din vectorul de jucatori obtinuti din pachet
     //la fel si pentru manageri si badge-uri
-    void sellPlayer(const player& pulledPlayer);
+    void sellPlayer(std::shared_ptr<player> pulledPlayer);
 
     void sellBadge(const badge& pulledBadge);
 

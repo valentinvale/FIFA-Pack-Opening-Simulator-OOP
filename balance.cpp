@@ -15,10 +15,10 @@ bool balance::pay(int price) {
     else { this->bal = this->bal - price; return true;}
 }
 
-void balance::sellPlayer(const player& pulledPlayer) {
-    if(pulledPlayer.getQuality() == "Bronze") this->bal += 30 * pulledPlayer.getOvr();
-    else if(pulledPlayer.getQuality() == "Silver") this->bal += 50 * pulledPlayer.getOvr();
-    else this->bal += 100 * pulledPlayer.getOvr();
+void balance::sellPlayer(std::shared_ptr<player> pulledPlayer) {
+    if(pulledPlayer->getQuality() == "Bronze") this->bal += 30 * pulledPlayer->getOvr();
+    else if(pulledPlayer->getQuality() == "Silver") this->bal += 50 * pulledPlayer->getOvr();
+    else this->bal += 100 * pulledPlayer->getOvr();
 //        pulledPlayers.erase(pulledPlayers.begin()+i);
 }
 

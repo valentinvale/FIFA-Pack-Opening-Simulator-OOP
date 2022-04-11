@@ -39,7 +39,7 @@ public:
 
     player& operator=(const player& other);
 
-    ~player();
+    virtual ~player();
 
     friend std::ostream &operator<<(std::ostream& os, const player& pl);
 

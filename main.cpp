@@ -23,6 +23,7 @@ std::ifstream fin("date.txt");
 int nrOfPlayers = 16;
 int nrOfBadges = 4;
 int nrOfManagers = 4;
+int nrP, nrB, nrM;
 int id, ovr, pac, sho, pas, dri, def, phy, div, han, kic, ref, spe, posi;
 
 std::string playerName, playerTeam, playerPosition, playerQuality, badgeQuality, managerQuality, badgeName, managerName, managerLeague;
@@ -117,6 +118,9 @@ do
     {
         system("cls");
         goldPack.open(blnc, playersPool, badgesPool, managersPool);
+        nrP = goldPack.getNrOfPlayers();
+        nrB = goldPack.getNrOfBadges();
+        nrM = goldPack.getNrOfManagers();
         std::cout << "Ai mai ramas cu atatia bani: " << '\n';
         std::cout << blnc << '\n' << '\n';
         std::cout << "Din pachet ai obtinut: " << '\n';
@@ -168,41 +172,45 @@ do
                 std::cin >> nrOrdine >> decizie;
                 if (decizie == 1)
                 {
-                    if (nrOrdine >= 1 && nrOrdine <= goldPack.getNrOfPlayers())
+                    if (nrOrdine >= 1 && nrOrdine <= nrP)
                     {
                         blnc.sellPlayer(goldPack.getPlayers()[nrOrdine - 1]);
                         goldPack.popPlayer(nrOrdine - 1);
+                        nrP--;
                     }
-                    else if (nrOrdine > goldPack.getNrOfPlayers() &&
-                               nrOrdine <= goldPack.getNrOfPlayers() + goldPack.getNrOfBadges())
+                    else if (nrOrdine > nrP && nrOrdine <= nrP + nrB)
                     {
-                        blnc.sellBadge(goldPack.getBadges()[nrOrdine - goldPack.getNrOfPlayers() - 1]);
-                        goldPack.popBadge(nrOrdine - goldPack.getNrOfPlayers() - 1);
+                        blnc.sellBadge(goldPack.getBadges()[nrOrdine - nrP - 1]);
+                        goldPack.popBadge(nrOrdine - nrP - 1);
+                        nrB--;
                     }
-                    else if (nrOrdine > goldPack.getNrOfPlayers() + goldPack.getNrOfBadges() &&
-                               nrOrdine <= goldPack.getNrOfPlayers() + goldPack.getNrOfBadges() + goldPack.getNrOfManagers())
+                    else if (nrOrdine > nrP + nrB &&
+                               nrOrdine <= nrP + nrB + nrM)
                     {
-                        blnc.sellManager(goldPack.getManagers()[nrOrdine - goldPack.getNrOfPlayers() - goldPack.getNrOfBadges()-1]);
-                        goldPack.popBadge(nrOrdine - goldPack.getNrOfPlayers() - goldPack.getNrOfBadges() - 1);
+                        blnc.sellManager(goldPack.getManagers()[nrOrdine - nrP - nrB-1]);
+                        goldPack.popManager(nrOrdine - nrP - nrB - 1);
+                        nrM--;
                     }
                 }
                 else if ( decizie == 2)
                 {
-                    if (nrOrdine >= 1 && nrOrdine <= goldPack.getNrOfPlayers())
+                    if (nrOrdine >= 1 && nrOrdine <= nrP)
                     {
                         col.addPlayer(goldPack.getPlayers()[nrOrdine - 1]);
                         goldPack.popPlayer(nrOrdine - 1);
+                        nrP--;
                     }
-                    else if (nrOrdine > goldPack.getNrOfPlayers() && nrOrdine <= goldPack.getNrOfPlayers() + goldPack.getNrOfBadges())
+                    else if (nrOrdine > nrP && nrOrdine <= nrP + nrB)
                     {
-                        col.addBadge(goldPack.getBadges()[nrOrdine - goldPack.getNrOfPlayers() - 1]);
-                        goldPack.popBadge(nrOrdine - goldPack.getNrOfPlayers() - 1);
+                        col.addBadge(goldPack.getBadges()[nrOrdine - nrP - 1]);
+                        goldPack.popBadge(nrOrdine - nrP- 1);
+                        nrB--;
                     }
-                    else if (nrOrdine > goldPack.getNrOfPlayers() + goldPack.getNrOfBadges() &&
-                               nrOrdine <= goldPack.getNrOfPlayers() + goldPack.getNrOfBadges() + goldPack.getNrOfManagers())
+                    else if (nrOrdine > nrP + nrB && nrOrdine <= nrP + nrB + nrM)
                     {
-                        col.addManager(goldPack.getManagers()[nrOrdine - goldPack.getNrOfPlayers() - goldPack.getNrOfBadges()-1]);
-                        goldPack.popBadge(nrOrdine - goldPack.getNrOfPlayers() - goldPack.getNrOfBadges() - 1);
+                        col.addManager(goldPack.getManagers()[nrOrdine - nrP - nrB -1]);
+                        goldPack.popManager(nrOrdine - nrP - nrB - 1);
+                        nrM--;
                     }
                 }
             }

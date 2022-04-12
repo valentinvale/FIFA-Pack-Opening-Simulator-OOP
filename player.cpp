@@ -52,7 +52,7 @@ int player::getOvr() const {return ovr; }
 //
 //const std::string &player::getTeam() const {return team; }
 //
-[[maybe_unused]] [[maybe_unused]]const std::string &player::getPos() const {return pos; }
+//[[maybe_unused]]const std::string &player::getPos() const {return pos; }
 
 void player::afis(std::ostream &os) const {
     os << "Nume: " << this->name << " " << "Id: " << this->id << " " "Echipa: " <<this->team << " " << "Pozitie: " << this->pos << " " <<"Ovr: " << this->ovr << " ";

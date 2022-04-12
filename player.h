@@ -17,7 +17,7 @@ protected:
 public:
 //    const std::string& getName() const;
 //    const std::string& getTeam() const;
-    [[maybe_unused]] const std::string& getPos() const;
+    //[[maybe_unused]] const std::string& getPos() const;
     const std::string& getQuality() const;
 //    int getId() const;
     int getOvr() const;

@@ -12,6 +12,6 @@ manager::manager(int id_, const std::string &name_, const std::string &quality_,
 manager::manager() {}
 
 std::ostream &operator<<(std::ostream &os, const manager &manager) {
-    os << "name: " << manager.name << " quality: " << manager.quality << " league: " << manager.league << '\n';
+    os << "Name: " << manager.name << " Id: " << manager.id <<" Quality: " << manager.quality << " League: " << manager.league << '\n';
     return os;
 }

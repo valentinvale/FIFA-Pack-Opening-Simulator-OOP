@@ -12,6 +12,6 @@ badge::badge(int id_, const std::string &name_, const std::string &quality_) :id
 //badge::badge() {}
 
 std::ostream &operator<<(std::ostream &os, const badge &badge) {
-    os << "name: " << badge.name << " quality: " << badge.quality <<'\n';
+    os << "Name: " << badge.name << " Id: " << badge.id <<" Quality: " << badge.quality <<'\n';
     return os;
 }

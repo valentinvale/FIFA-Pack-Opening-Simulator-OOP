@@ -16,6 +16,7 @@
 #include "collection.h"
 #include "goalkeeper.h"
 #include "outfieldplayer.h"
+#include "rlutil.h"
 
 int main() {
 
@@ -101,7 +102,8 @@ balance blnc{100000};
     pack goldPack{1000, 5, 1, 1, emptyPlayers, emptyBadges, emptyManagers};
 do
 {
-    system("cls");
+    //system("cls");
+    rlutil::cls();
     std::cout << "Balance: " << blnc << '\n' << '\n';
     std::cout << "Apasa tasta corespunzatoare pentru a dschide pachetul dorit" << '\n' << '\n';
     std::cout << "Apasa tasta 9 pentru a vedea colectia" << '\n' << '\n';
@@ -112,11 +114,15 @@ do
     if (input == 9)
     {
         std::cout << col << '\n';
-        system("pause");
+        //system("pause");
+        //std::cout << '\n' <<"Press any key to continue" <<'\n';
+        rlutil::anykey();
+
     }
     else if (input == 1)
     {
-        system("cls");
+        //system("cls");
+        rlutil::cls();
         goldPack.open(blnc, playersPool, badgesPool, managersPool);
         nrP = goldPack.getNrOfPlayers();
         nrB = goldPack.getNrOfBadges();
@@ -126,7 +132,8 @@ do
         std::cout << "Din pachet ai obtinut: " << '\n';
 
         do {
-            system("cls");
+            //system("cls");
+            rlutil::cls();
             std::cout << goldPack << '\n' << '\n';
             std::cout << "Apasa tasta 1 pentru a vinde toate itemele" << '\n' << '\n';
             std::cout << "Apasa tasta 2 pentru a adauga toate itemele la colectie" << '\n' << '\n';
@@ -215,7 +222,9 @@ do
                 }
             }
         }while(!goldPack.getPlayers().empty() || !goldPack.getBadges().empty() || !goldPack.getManagers().empty());
-        system("pause");
+        //system("pause");
+        //std::cout << '\n' <<"Press any key to continue" <<'\n';
+        rlutil::anykey();
     }
 
 }while(input != 0);

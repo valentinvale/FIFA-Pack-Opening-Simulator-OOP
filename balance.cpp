@@ -6,7 +6,7 @@ balance::balance(int bal) : bal(bal) {
 }
 
 std::ostream &operator<<(std::ostream &os, const balance &balance) {
-    os << "bal: " << balance.bal;
+    os << balance.bal;
     return os;
 }
 

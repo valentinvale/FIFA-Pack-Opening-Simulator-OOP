@@ -51,6 +51,7 @@ int main() {
     {
         std::cout << "Nu a reusit conversia cu pointer\n";
     }
+    delete b;
 
     for (int i = 0; i < nrOfPlayers; ++i) {
         fin >> id >> playerName >> playerTeam >> playerPosition >> playerQuality >> ovr;

@@ -32,6 +32,26 @@ int main() {
     std::vector<badge> badgesPool;
     std::vector<manager> managersPool;
 
+    player* b = new outfieldplayer(0, "baza", "baza", "ST", "Gold", 0, 0, 0, 0, 0, 0, 0);
+    try
+    {
+        [[maybe_unused]]auto& der1 = dynamic_cast<outfieldplayer&>(*b);
+    }
+    catch (std::bad_cast& err)
+    {
+        std::cout << err.what() << '\n';
+    }
+
+    auto* der2 = dynamic_cast<goalkeeper*>(b);
+    if(der2 != nullptr)
+    {
+        der2->chemistryStyle();
+    }
+    else
+    {
+        std::cout << "Nu a reusit conversia cu pointer\n";
+    }
+
     for (int i = 0; i < nrOfPlayers; ++i) {
         fin >> id >> playerName >> playerTeam >> playerPosition >> playerQuality >> ovr;
         if (playerPosition == "GK")

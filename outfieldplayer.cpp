@@ -22,4 +22,9 @@ void outfieldplayer::afis(std::ostream &os) const {
        << opl.def << " phy: " << opl.phy << '\n';
 }
 
+void outfieldplayer::chemistryStyle() {
+    this->pas += 2;
+    this->sho += 2;
+}
+
 

@@ -11,22 +11,26 @@ collection::collection(const std::vector<std::shared_ptr <player>> &players_, co
 }
 
 std::ostream &operator<<(std::ostream &os, const collection &collection) {
+    int cc = 1;
     os << "players:\n";
 
     for (const auto & player : collection.players) {
-        os << *player;
+        os << cc <<". " << *player;
         os << '\n';
+        cc++;
     }
 
     os << "badges:\n";
     for (const auto & badge : collection.badges) {
-        os << badge;
+        os << cc << ". " << badge;
         os << '\n';
+        cc++;
     }
     os << "managers:\n";
     for (const auto & manager : collection.managers) {
-        os << manager;
+        os << cc << ". " << manager;
         os << '\n';
+        cc++;
     }
     return os;
 }
@@ -45,3 +49,29 @@ void collection::addManager(const manager& pulledManager) {
     this->managers.push_back(pulledManager);
 //        pulledManagers.erase(pulledManagers.begin()+i);
 }
+
+const std::vector<std::shared_ptr<player>> &collection::getPlayers() const {
+    return players;
+}
+
+const std::vector<badge> &collection::getBadges() const {
+    return badges;
+}
+
+const std::vector<manager> &collection::getManagers() const {
+    return managers;
+}
+
+void collection::popPlayer(int i) {
+    this->players.erase(this->players.begin()+i);
+}
+
+void collection::popBadge(int i) {
+    this->badges.erase(this->badges.begin()+i);
+}
+
+void collection::popManager(int i) {
+    this->managers.erase(this->managers.begin()+i);
+}
+
+

@@ -25,12 +25,22 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const collection& collection);
 
+    const std::vector<std::shared_ptr<player>> &getPlayers() const;
+
+    const std::vector<badge> &getBadges() const;
+
+    const std::vector<manager> &getManagers() const;
+
     //metode pentru adaugat la colectie
     void addPlayer(std::shared_ptr<player> pulledPlayer);
 
     void addBadge(const badge& pulledBadge);
 
     void addManager(const manager& pulledManager);
+
+    void popPlayer(int i);
+    void popBadge(int i);
+    void popManager(int i);
 
 };
 

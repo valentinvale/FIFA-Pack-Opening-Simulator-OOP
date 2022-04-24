@@ -21,3 +21,9 @@ void goalkeeper::afis(std::ostream &os) const {
        << gk.posi << '\n';
 }
 
+void goalkeeper::chemistryStyle() {
+    this->div += 2;
+    this->han += 2;
+
+}
+

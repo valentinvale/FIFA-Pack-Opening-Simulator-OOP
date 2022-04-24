@@ -14,7 +14,11 @@ protected:
     std::string quality;
     int ovr;
 
+    virtual void afis(std::ostream &os) const = 0;
+
+
 public:
+    virtual void chemistryStyle() = 0;
 //    const std::string& getName() const;
 //    const std::string& getTeam() const;
     //[[maybe_unused]] const std::string& getPos() const;
@@ -28,7 +32,7 @@ public:
 //    int getDef() const;
 //    int getPhy() const;
 
-    virtual void afis(std::ostream &os) const;
+
 
     player(int id_, const std::string& name_, const std::string& team_, const std::string& pos_, const std::string& quality_,
            int ovr_);

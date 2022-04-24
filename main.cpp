@@ -98,7 +98,7 @@ int main() {
     //std::cout << "Cati bani ai dupa ce ai vandut: \n";
     //std::cout << blnc << '\n';
 
-    int input, inputSellAddAll, nrOrdine, decizie;
+    int input, inputSellAddAll, nrOrdine, decizie, inpCol;
     pack goldPack{1000, 5, 1, 1, emptyPlayers, emptyBadges, emptyManagers};
 
     do
@@ -114,10 +114,65 @@ int main() {
 
         if (input == 9)
         {
-            std::cout << col << '\n';
-            //system("pause");
-            //std::cout << '\n' <<"Press any key to continue" <<'\n';
+            do
+            {
+                rlutil::cls();
+                std::cout << col << '\n';
+                std::cout << '\n';
+                //system("pause");
+                //std::cout << '\n' <<"Press any key to continue" <<'\n';
+                //rlutil::anykey();
+                std::cout << "Apasa tasta 3, introdu numarul de ordine al item-ului si cifra 1 sau 2 pentru a-l vinde, respectiv a-i aplica un boost in schimbul a 1000 de coins\n" << '\n';
+                std::cout << "Apasa tasta 9 pentru a reveni la meniul principal\n" << '\n';
+                std::cin >> inpCol;
+
+                if(inpCol == 3)
+                {
+                    std::cin >> nrOrdine >> decizie;
+                    int nrPCol = col.getPlayers().size();
+                    int nrBCol = col.getBadges().size();
+                    int nrMCol = col.getManagers().size();
+                    if(decizie == 1)
+                    {
+                        if (nrOrdine >= 1 && nrOrdine <= nrPCol)
+                        {
+                            blnc.sellPlayer(col.getPlayers()[nrOrdine - 1]);
+                            col.popPlayer(nrOrdine - 1);
+                            nrPCol--;
+                        }
+                        else if (nrOrdine > nrPCol && nrOrdine <= nrPCol + nrBCol)
+                        {
+                            blnc.sellBadge(col.getBadges()[nrOrdine - nrPCol - 1]);
+                            col.popBadge(nrOrdine - nrPCol - 1);
+                            nrBCol--;
+                        }
+                        else if (nrOrdine > nrPCol + nrBCol &&
+                                 nrOrdine <= nrPCol + nrBCol + nrMCol)
+                        {
+                            blnc.sellManager(col.getManagers()[nrOrdine - nrPCol - nrBCol-1]);
+                            col.popManager(nrOrdine - nrPCol - nrBCol - 1);
+                            nrMCol--;
+                        }
+                    }
+                    else if(decizie == 2)
+                    {
+                        if (nrOrdine >= 1 && nrOrdine <= nrPCol)
+                        {
+                            if(blnc.pay(1000))
+                                col.getPlayers()[nrOrdine - 1]->chemistryStyle();
+                            else
+                                std::cout << "Nu s-a putut aplica boost-ul\n";
+                        }
+                        else
+                        {
+                            std::cout << "Nu se poate aplica boost unui manager/badge\n";
+                        }
+                    }
+                }
+            }while(inpCol != 9);
             rlutil::anykey();
+
+
 
         }
         else if (input == 1)

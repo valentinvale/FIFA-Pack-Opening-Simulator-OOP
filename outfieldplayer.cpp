@@ -16,9 +16,10 @@ std::ostream &operator<<(std::ostream &os, const outfieldplayer &outfieldplayer)
 
 void outfieldplayer::afis(std::ostream &os) const {
     player::afis(os);
-    os << " pac: " << this->pac << " sho: "
-       << this->sho << " pas: " << this->pas << " dri: " << this->dri << " def: "
-       << this->def << " phy: " << this->phy << '\n';
+    auto& opl = *this;
+    os << " pac: " << opl.pac << " sho: "
+       << opl.sho << " pas: " << opl.pas << " dri: " << opl.dri << " def: "
+       << opl.def << " phy: " << opl.phy << '\n';
 }
 
 

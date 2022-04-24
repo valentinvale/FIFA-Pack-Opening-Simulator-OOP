@@ -15,8 +15,9 @@ std::ostream &operator<<(std::ostream &os, const goalkeeper &goalkeeper) {
 
 void goalkeeper::afis(std::ostream &os) const {
     player::afis(os);
-    os <<" div: " << this->div << " han: " << this->han
-       << " kic: " << this->kic << " ref: " << this->ref << " spe: " << this->spe << " pos: "
-       << this->posi << '\n';
+    auto& gk = *this;
+    os <<" div: " << gk.div << " han: " << gk.han
+       << " kic: " << gk.kic << " ref: " << gk.ref << " spe: " << gk.spe << " pos: "
+       << gk.posi << '\n';
 }
 

@@ -10,13 +10,13 @@
 
 class invalidStat : public std::runtime_error{
 public:
-    explicit invalidStat(const std::string& arg);;
+    explicit invalidStat(const std::string& arg);
 
 };
 
 class invalidId : public invalidStat{
 public:
-    explicit invalidId(const std::string& arg);;
+    explicit invalidId(const std::string& arg);
 };
 
 //class invalidAmount : public invalidStat{

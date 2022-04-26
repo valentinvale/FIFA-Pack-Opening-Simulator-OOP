@@ -26,7 +26,7 @@ int main() {
     int nrOfBadges = 4;
     int nrOfManagers = 4;
     int nrP, nrB, nrM;
-    int id, ovr, pac, sho, pas, dri, def, phy, div, han, kic, ref, spe, posi;
+    int id, ovr=0, pac, sho, pas, dri, def, phy, div, han, kic, ref, spe, posi;
 
     std::string playerName, playerTeam, playerPosition, playerQuality, badgeQuality, managerQuality, badgeName, managerName, managerLeague;
     std::vector<std::shared_ptr<player>> playersPool;
@@ -177,7 +177,7 @@ int main() {
     do
     {
         //system("cls");
-        //rlutil::cls();
+        rlutil::cls();
         std::cout << "Balance: " << blnc << '\n' << '\n';
         std::cout << "Apasa tasta corespunzatoare pentru a dschide pachetul dorit" << '\n' << '\n';
         std::cout << "Apasa tasta 9 pentru a vedea colectia" << '\n' << '\n';

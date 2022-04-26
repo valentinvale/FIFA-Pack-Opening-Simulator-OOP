@@ -24,7 +24,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml when changing name here
-add_executable(${PROJECT_NAME} main.cpp player.cpp player.h badge.cpp badge.h manager.cpp manager.h balance.cpp balance.h pack.cpp pack.h collection.cpp collection.h outfieldplayer.cpp outfieldplayer.h goalkeeper.cpp goalkeeper.h)
+add_executable(${PROJECT_NAME} main.cpp player.cpp player.h badge.cpp badge.h manager.cpp manager.h balance.cpp balance.h pack.cpp pack.h collection.cpp collection.h outfieldplayer.cpp outfieldplayer.h goalkeeper.cpp goalkeeper.h error.cpp error.h)
 
 ###############################################################################
 

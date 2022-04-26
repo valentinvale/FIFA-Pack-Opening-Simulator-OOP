@@ -17,6 +17,7 @@
 #include "goalkeeper.h"
 #include "outfieldplayer.h"
 #include "rlutil.h"
+#include "error.h"
 
 int main() {
 
@@ -54,32 +55,83 @@ int main() {
     delete b;
 
     for (int i = 0; i < nrOfPlayers; ++i) {
-        fin >> id >> playerName >> playerTeam >> playerPosition >> playerQuality >> ovr;
+        try
+        {
+            fin >> id >> playerName >> playerTeam >> playerPosition >> playerQuality >> ovr;
+            if(id < 0) throw (invalidId{"Invalid id"});
+        }
+        catch(std::exception& err)
+        {
+            std::cout << err.what() << '\n';
+        }
         if (playerPosition == "GK")
         {
             fin >> div >> han >> kic >> ref >> spe >> posi;
-            goalkeeper gkp{id, playerName, playerTeam, playerPosition, playerQuality, ovr, div, han, kic, ref, spe, posi};
-            playersPool.push_back(gkp.clone());
+            try
+            {   if(ovr < 0 || div < 0 || han < 0 || kic < 0 || ref < 0 || spe < 0 || posi < 0) throw (invalidStat{"Invalid stat"});
+                else
+                {
+                    goalkeeper gkp{id, playerName, playerTeam, playerPosition,playerQuality, ovr, div, han, kic, ref,spe, posi};
+                    playersPool.push_back(gkp.clone());
+                }
+            }
+            catch(std::exception& err)
+            {
+                std::cout << err.what() << '\n';
+            }
         }
         else
         {
             fin >> pac >> sho >> pas >> dri >> def >> phy;
-            outfieldplayer ofp{id, playerName, playerTeam, playerPosition, playerQuality, ovr, pac, sho, pas, dri, def, phy};
-            playersPool.push_back(ofp.clone());
+            try
+            {
+                if(ovr < 0 || pac < 0 || sho < 0 || pas < 0 || dri < 0 || def < 0 || phy < 0) throw (invalidStat{"Invalid stat"});
+                else
+                {
+                    outfieldplayer ofp{id, playerName, playerTeam, playerPosition, playerQuality, ovr, pac, sho, pas, dri, def, phy};
+                    playersPool.push_back(ofp.clone());
+                }
+            }
+            catch(std::exception& err)
+            {
+                std::cout << err.what() << '\n';
+            }
         }
 
     }
 
     for (int i = 0; i < nrOfBadges; ++i) {
         fin >> id >> badgeName >> badgeQuality;
-        badge bdg{id, badgeName, badgeQuality};
-        badgesPool.push_back(bdg);
+        try
+        {
+            if(id < 0) throw (invalidId{"Id invalid"});
+            else
+            {
+                badge bdg{id, badgeName, badgeQuality};
+                badgesPool.push_back(bdg);
+            }
+        }
+        catch(std::exception& err)
+        {
+            std::cout << err.what() << '\n';
+        }
     }
 
     for (int i = 0; i < nrOfManagers; ++i) {
         fin >> id >> managerName >> managerQuality >> managerLeague;
-        manager mngr{id, managerName, managerQuality, managerLeague};
-        managersPool.push_back(mngr);
+        try
+        {
+            if(id < 0) throw (invalidId{"Id invalid"});
+            else
+            {
+                manager mngr{id, managerName, managerQuality, managerLeague};
+                managersPool.push_back(mngr);
+            }
+        }
+        catch(std::exception& err)
+        {
+            std::cout << err.what() << '\n';
+        }
     }
 
     std::vector<std::shared_ptr<player>> emptyPlayers;
@@ -125,7 +177,7 @@ int main() {
     do
     {
         //system("cls");
-        rlutil::cls();
+        //rlutil::cls();
         std::cout << "Balance: " << blnc << '\n' << '\n';
         std::cout << "Apasa tasta corespunzatoare pentru a dschide pachetul dorit" << '\n' << '\n';
         std::cout << "Apasa tasta 9 pentru a vedea colectia" << '\n' << '\n';

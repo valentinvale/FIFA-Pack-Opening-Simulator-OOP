@@ -1,4 +1,6 @@
 #include <string>
+#include <memory>
+#include <utility>
 
 #ifndef OOP_PLAYER_H
 #define OOP_PLAYER_H
@@ -16,7 +18,6 @@ protected:
 
     virtual void afis(std::ostream &os) const = 0;
 
-
 public:
     virtual void chemistryStyle() = 0;
 //    const std::string& getName() const;
@@ -32,20 +33,20 @@ public:
 //    int getDef() const;
 //    int getPhy() const;
 
-
-
     player(int id_, const std::string& name_, const std::string& team_, const std::string& pos_, const std::string& quality_,
            int ovr_);
 
     //player();
 
+    virtual ~player();
+
     player(const player& other);
 
     player& operator=(const player& other);
 
-    virtual ~player();
-
     friend std::ostream &operator<<(std::ostream& os, const player& pl);
+
+    virtual std::shared_ptr<player> clone() const = 0;
 
 };
 

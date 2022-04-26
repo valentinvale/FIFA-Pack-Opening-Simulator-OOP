@@ -59,13 +59,13 @@ int main() {
         {
             fin >> div >> han >> kic >> ref >> spe >> posi;
             goalkeeper gkp{id, playerName, playerTeam, playerPosition, playerQuality, ovr, div, han, kic, ref, spe, posi};
-            playersPool.push_back(std::make_shared<goalkeeper>(gkp));
+            playersPool.push_back(gkp.clone());
         }
         else
         {
             fin >> pac >> sho >> pas >> dri >> def >> phy;
             outfieldplayer ofp{id, playerName, playerTeam, playerPosition, playerQuality, ovr, pac, sho, pas, dri, def, phy};
-            playersPool.push_back(std::make_shared<outfieldplayer>(ofp));
+            playersPool.push_back(ofp.clone());
         }
 
     }

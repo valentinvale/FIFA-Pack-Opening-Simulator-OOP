@@ -27,3 +27,31 @@ void goalkeeper::chemistryStyle() {
 
 }
 
+goalkeeper::~goalkeeper() {
+
+}
+
+std::shared_ptr<player> goalkeeper::clone() const {
+    return std::make_shared <goalkeeper>(*this);
+}
+
+goalkeeper &goalkeeper::operator=(const goalkeeper &other) {
+    name = other.name;
+    team = other.team;
+    pos = other.pos;
+    quality = other.quality;
+    id = other.id;
+    ovr = other.ovr;
+    han = other.han;
+    kic = other.kic;
+    div = other.div;
+    ref = other.ref;
+    spe = other.spe;
+    posi = other.posi;
+
+    return *this;
+}
+
+goalkeeper::goalkeeper(const goalkeeper &other) : player{other}, div{other.div}, han{other.han}, kic{other.kic},
+ref{other.ref}, spe{other.spe}, posi{other.posi} {}
+

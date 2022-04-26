@@ -27,4 +27,32 @@ void outfieldplayer::chemistryStyle() {
     this->sho += 2;
 }
 
+outfieldplayer::~outfieldplayer() {
+
+}
+
+std::shared_ptr<player> outfieldplayer::clone() const {
+    return std::make_shared <outfieldplayer>(*this);
+}
+
+outfieldplayer &outfieldplayer::operator=(const outfieldplayer &other) {
+    name = other.name;
+    team = other.team;
+    pos = other.pos;
+    quality = other.quality;
+    id = other.id;
+    ovr = other.ovr;
+    pac = other.pac;
+    sho = other.sho;
+    dri = other.dri;
+    pas = other.pas;
+    def = other.def;
+    phy = other.phy;
+
+    return *this;
+}
+
+outfieldplayer::outfieldplayer(const outfieldplayer &other) : player{other}, pac{other.pac},
+sho{other.sho}, pas{other.pas}, dri{other.dri}, def{other.def}, phy{other.phy} {}
+
 

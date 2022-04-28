@@ -217,7 +217,7 @@ int main() {
                                             blnc.sellPlayer(col.getPlayers()[nrOrdine - 1]);
                                             col.popPlayer(nrOrdine - 1);
                                             nrPCol--;
-                                        } else if (nrOrdine > nrPCol && nrOrdine <= nrPCol + nrBCol) {
+                                        } else if (nrOrdine <= nrPCol + nrBCol) {
                                             blnc.sellBadge(col.getBadges()[nrOrdine - nrPCol - 1]);
                                             col.popBadge(nrOrdine - nrPCol - 1);
                                             nrBCol--;
@@ -335,7 +335,7 @@ int main() {
                                                 blnc.sellPlayer(goldPack.getPlayers()[nrOrdine - 1]);
                                                 goldPack.popPlayer(nrOrdine - 1);
                                                 nrP--;
-                                            } else if (nrOrdine > nrP && nrOrdine <= nrP + nrB) {
+                                            } else if (nrOrdine <= nrP + nrB) {
                                                 blnc.sellBadge(goldPack.getBadges()[nrOrdine - nrP - 1]);
                                                 goldPack.popBadge(nrOrdine - nrP - 1);
                                                 nrB--;
@@ -359,7 +359,7 @@ int main() {
                                             col.addPlayer(goldPack.getPlayers()[nrOrdine - 1]);
                                             goldPack.popPlayer(nrOrdine - 1);
                                             nrP--;
-                                        } else if (nrOrdine > nrP && nrOrdine <= nrP + nrB) {
+                                        } else if (nrOrdine <= nrP + nrB) {
                                             col.addBadge(goldPack.getBadges()[nrOrdine - nrP - 1]);
                                             goldPack.popBadge(nrOrdine - nrP - 1);
                                             nrB--;

@@ -221,8 +221,7 @@ int main() {
                                             blnc.sellBadge(col.getBadges()[nrOrdine - nrPCol - 1]);
                                             col.popBadge(nrOrdine - nrPCol - 1);
                                             nrBCol--;
-                                        } else if (nrOrdine > nrPCol + nrBCol &&
-                                                   nrOrdine <= nrPCol + nrBCol + nrMCol) {
+                                        } else if (nrOrdine <= nrPCol + nrBCol + nrMCol) {
                                             blnc.sellManager(col.getManagers()[nrOrdine - nrPCol - nrBCol - 1]);
                                             col.popManager(nrOrdine - nrPCol - nrBCol - 1);
                                             nrMCol--;
@@ -339,8 +338,7 @@ int main() {
                                                 blnc.sellBadge(goldPack.getBadges()[nrOrdine - nrP - 1]);
                                                 goldPack.popBadge(nrOrdine - nrP - 1);
                                                 nrB--;
-                                            } else if (nrOrdine > nrP + nrB &&
-                                                       nrOrdine <= nrP + nrB + nrM) {
+                                            } else if (nrOrdine <= nrP + nrB + nrM) {
                                                 blnc.sellManager(goldPack.getManagers()[nrOrdine - nrP - nrB - 1]);
                                                 goldPack.popManager(nrOrdine - nrP - nrB - 1);
                                                 nrM--;
@@ -363,7 +361,7 @@ int main() {
                                             col.addBadge(goldPack.getBadges()[nrOrdine - nrP - 1]);
                                             goldPack.popBadge(nrOrdine - nrP - 1);
                                             nrB--;
-                                        } else if (nrOrdine > nrP + nrB && nrOrdine <= nrP + nrB + nrM) {
+                                        } else if (nrOrdine <= nrP + nrB + nrM) {
                                             col.addManager(goldPack.getManagers()[nrOrdine - nrP - nrB - 1]);
                                             goldPack.popManager(nrOrdine - nrP - nrB - 1);
                                             nrM--;

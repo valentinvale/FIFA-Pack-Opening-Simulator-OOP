@@ -19,10 +19,10 @@ public:
     explicit invalidId(const std::string& arg);
 };
 
-//class invalidAmount : public invalidStat{
-//public:
-//    explicit invalidAmount(const std::string& arg) : invalidStat{arg} {};
-//};
+class invalidInput : public invalidStat{
+public:
+    explicit invalidInput(const std::string& arg);
+};
 
 
 #endif //OOP_ERROR_H

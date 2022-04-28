@@ -201,17 +201,19 @@ int main() {
                     std::cout << "Apasa tasta 9 pentru a reveni la meniul principal\n" << '\n';
                     std::cin >> inpCol;
 
-                    if (inpCol == 3) {
-                        std::cin >> nrOrdine >> decizie;
-                        int nrPCol = col.getPlayers().size();
-                        int nrBCol = col.getBadges().size();
-                        int nrMCol = col.getManagers().size();
-                        try {
-                            if (decizie == 1) {
-                                try {
-                                    if (nrOrdine > nrPCol + nrMCol + nrBCol || nrOrdine <= 0) throw (invalidInput{"Numar de ordine invalid"});
-                                    else
-                                        if (nrOrdine >= 1 && nrOrdine <= nrPCol) {
+                    try
+                    {
+                        if (inpCol == 3) {
+                            std::cin >> nrOrdine >> decizie;
+                            int nrPCol = col.getPlayers().size();
+                            int nrBCol = col.getBadges().size();
+                            int nrMCol = col.getManagers().size();
+                            try {
+                                if (decizie == 1) {
+                                    try {
+                                        if (nrOrdine > nrPCol + nrMCol + nrBCol || nrOrdine <= 0)
+                                            throw (invalidInput{"Numar de ordine invalid"});
+                                        else if (nrOrdine >= 1 && nrOrdine <= nrPCol) {
                                             blnc.sellPlayer(col.getPlayers()[nrOrdine - 1]);
                                             col.popPlayer(nrOrdine - 1);
                                             nrPCol--;
@@ -225,18 +227,16 @@ int main() {
                                             col.popManager(nrOrdine - nrPCol - nrBCol - 1);
                                             nrMCol--;
                                         }
-                                }
-                                catch(std::exception& err)
-                                {
-                                    std::cout << err.what() << '\n';
-                                    rlutil::anykey();
-                                }
-                            } else if (decizie == 2) {
-                                try
-                                {
-                                    if (nrOrdine > nrPCol || nrOrdine <= 0) throw (invalidInput{"Numar de ordine invalid"});
-                                    else
-                                        if (nrOrdine >= 1 && nrOrdine <= nrPCol) {
+                                    }
+                                    catch (std::exception &err) {
+                                        std::cout << err.what() << '\n';
+                                        rlutil::anykey();
+                                    }
+                                } else if (decizie == 2) {
+                                    try {
+                                        if (nrOrdine > nrPCol || nrOrdine <= 0)
+                                            throw (invalidInput{"Numar de ordine invalid"});
+                                        else if (nrOrdine >= 1 && nrOrdine <= nrPCol) {
                                             if (blnc.pay(1000))
                                                 col.getPlayers()[nrOrdine - 1]->chemistryStyle();
                                             else
@@ -244,23 +244,28 @@ int main() {
                                         } else {
                                             std::cout << "Nu se poate aplica boost unui manager/badge\n";
                                         }
-                                }
-                                catch(std::exception& err)
-                                {
-                                    std::cout << err.what() << '\n';
-                                    rlutil::anykey();
+                                    }
+                                    catch (std::exception &err) {
+                                        std::cout << err.what() << '\n';
+                                        rlutil::anykey();
+                                    }
+                                } else {
+                                    throw (invalidInput{"Input invalid"});
                                 }
                             }
-                            else
-                            {
-                                if(input != 9) throw (invalidInput{"Input invalid"});
+                            catch (std::exception &err) {
+                                std::cout << err.what() << '\n';
+                                rlutil::anykey();
                             }
                         }
-                        catch(std::exception& err)
+                        else
                         {
-                            std::cout << err.what() << '\n';
-                            rlutil::anykey();
+                            if (inpCol != 9) throw (invalidInput{"Input invalid"});
                         }
+                    }
+                    catch (std::exception &err) {
+                        std::cout << err.what() << '\n';
+                        rlutil::anykey();
                     }
                 } while (inpCol != 9);
                 rlutil::anykey();
@@ -326,7 +331,7 @@ int main() {
                                     {
                                         if(nrOrdine > nrP + nrB + nrM || nrOrdine <= 0) throw (invalidInput{"Numar de ordine invalid"});
                                         else
-                                            if (nrOrdine >= 1 && nrOrdine <= nrP) {
+                                            if (nrOrdine <= nrP) {
                                                 blnc.sellPlayer(goldPack.getPlayers()[nrOrdine - 1]);
                                                 goldPack.popPlayer(nrOrdine - 1);
                                                 nrP--;
@@ -350,7 +355,7 @@ int main() {
                                     try
                                     {
                                         if (nrOrdine > nrP + nrM + nrB || nrOrdine <= 0) throw (invalidInput{"Numar de ordine invalid"});
-                                        if (nrOrdine >= 1 && nrOrdine <= nrP) {
+                                        if (nrOrdine <= nrP) {
                                             col.addPlayer(goldPack.getPlayers()[nrOrdine - 1]);
                                             goldPack.popPlayer(nrOrdine - 1);
                                             nrP--;

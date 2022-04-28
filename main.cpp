@@ -213,7 +213,7 @@ int main() {
                                     try {
                                         if (nrOrdine > nrPCol + nrMCol + nrBCol || nrOrdine <= 0)
                                             throw (invalidInput{"Numar de ordine invalid"});
-                                        else if (nrOrdine >= 1 && nrOrdine <= nrPCol) {
+                                        else if (nrOrdine <= nrPCol) {
                                             blnc.sellPlayer(col.getPlayers()[nrOrdine - 1]);
                                             col.popPlayer(nrOrdine - 1);
                                             nrPCol--;
@@ -236,7 +236,7 @@ int main() {
                                     try {
                                         if (nrOrdine > nrPCol || nrOrdine <= 0)
                                             throw (invalidInput{"Numar de ordine invalid"});
-                                        else if (nrOrdine >= 1 && nrOrdine <= nrPCol) {
+                                        else if (nrOrdine <= nrPCol) {
                                             if (blnc.pay(1000))
                                                 col.getPlayers()[nrOrdine - 1]->chemistryStyle();
                                             else

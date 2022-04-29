@@ -30,7 +30,7 @@ int main() {
     int nrOfBadges = 4;
     int nrOfManagers = 4;
     int nrP, nrB, nrM;
-    int id, ovr=0, pac, sho, pas, dri, def, phy, div, han, kic, ref, spe, posi;
+    int id, pac, sho, pas, dri, def, phy, div, han, kic, ref, spe, posi;
 
     std::string playerName, playerTeam, playerPosition, playerQuality, badgeQuality, managerQuality, badgeName, managerName, managerLeague;
     std::vector<std::shared_ptr<player>> playersPool, playersPoolGold;
@@ -59,6 +59,7 @@ int main() {
     delete b;
 
     for (int i = 0; i < nrOfPlayers; ++i) {
+        int ovr = 0;
         std::getline(fin, line);
 
         std::stringstream str(line);
@@ -207,6 +208,8 @@ int main() {
             std::cout << err.what() << '\n';
         }
     }
+
+    fin.close();
 
     std::vector<std::shared_ptr<player>> emptyPlayers;
     std::vector<badge> emptyBadges;

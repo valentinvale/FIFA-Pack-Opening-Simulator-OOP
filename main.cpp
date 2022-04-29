@@ -7,6 +7,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <sstream>
 
 #include "player.h"
 #include "badge.h"
@@ -21,15 +22,18 @@
 
 int main() {
 
+    std::string line;
+    std::string word;
+
     std::ifstream fin("date.txt");
-    int nrOfPlayers = 16;
+    int nrOfPlayers = 19239;
     int nrOfBadges = 4;
     int nrOfManagers = 4;
     int nrP, nrB, nrM;
     int id, ovr=0, pac, sho, pas, dri, def, phy, div, han, kic, ref, spe, posi;
 
     std::string playerName, playerTeam, playerPosition, playerQuality, badgeQuality, managerQuality, badgeName, managerName, managerLeague;
-    std::vector<std::shared_ptr<player>> playersPool;
+    std::vector<std::shared_ptr<player>> playersPool, playersPoolGold;
     std::vector<badge> badgesPool;
     std::vector<manager> managersPool;
 
@@ -55,9 +59,25 @@ int main() {
     delete b;
 
     for (int i = 0; i < nrOfPlayers; ++i) {
+        std::getline(fin, line);
+
+        std::stringstream str(line);
+
+        std::getline(str, word, ',');
+        id = std::stoi(word);
+        std::getline(str, word, ',');
+        playerName = word;
+        std::getline(str, word, ',');
+        playerTeam = word;
+        std::getline(str, word, ',');
+        playerPosition = word;
+        std::getline(str, word, ',');
+        playerQuality = word;
+        std::getline(str, word, ',');
+        ovr = std::stoi(word);
         try
         {
-            fin >> id >> playerName >> playerTeam >> playerPosition >> playerQuality >> ovr;
+            //fin >> id >> playerName >> playerTeam >> playerPosition >> playerQuality >> ovr;
             if(id < 0) throw (invalidId{"Invalid id"});
         }
         catch(std::exception& err)
@@ -66,12 +86,27 @@ int main() {
         }
         if (playerPosition == "GK")
         {
-            fin >> div >> han >> kic >> ref >> spe >> posi;
+            std::getline(str, word, ',');
+            div = std::stoi(word);
+            std::getline(str, word, ',');
+            han = std::stoi(word);
+            std::getline(str, word, ',');
+            kic = std::stoi(word);
+            std::getline(str, word, ',');
+            ref = std::stoi(word);
+            std::getline(str, word, ',');
+            spe = std::stoi(word);
+            std::getline(str, word, ',');
+            posi = std::stoi(word);
+
+            //fin >> div >> han >> kic >> ref >> spe >> posi;
             try
             {   if(ovr < 0 || div < 0 || han < 0 || kic < 0 || ref < 0 || spe < 0 || posi < 0) throw (invalidStat{"Invalid stat"});
                 else
                 {
                     goalkeeper gkp{id, playerName, playerTeam, playerPosition,playerQuality, ovr, div, han, kic, ref,spe, posi};
+                    if(playerQuality == "Gold")
+                        playersPoolGold.push_back(gkp.clone());
                     playersPool.push_back(gkp.clone());
                 }
             }
@@ -82,13 +117,28 @@ int main() {
         }
         else
         {
-            fin >> pac >> sho >> pas >> dri >> def >> phy;
+            std::getline(str, word, ',');
+            pac = std::stoi(word);
+            std::getline(str, word, ',');
+            sho = std::stoi(word);
+            std::getline(str, word, ',');
+            pas = std::stoi(word);
+            std::getline(str, word, ',');
+            dri = std::stoi(word);
+            std::getline(str, word, ',');
+            def = std::stoi(word);
+            std::getline(str, word, ',');
+            phy = std::stoi(word);
+
+            //fin >> pac >> sho >> pas >> dri >> def >> phy;
             try
             {
                 if(ovr < 0 || pac < 0 || sho < 0 || pas < 0 || dri < 0 || def < 0 || phy < 0) throw (invalidStat{"Invalid stat"});
                 else
                 {
                     outfieldplayer ofp{id, playerName, playerTeam, playerPosition, playerQuality, ovr, pac, sho, pas, dri, def, phy};
+                    if(playerQuality == "Gold")
+                        playersPoolGold.push_back(ofp.clone());
                     playersPool.push_back(ofp.clone());
                 }
             }
@@ -101,7 +151,18 @@ int main() {
     }
 
     for (int i = 0; i < nrOfBadges; ++i) {
-        fin >> id >> badgeName >> badgeQuality;
+        std::getline(fin, line);
+
+        std::stringstream str(line);
+
+        std::getline(str, word, ',');
+        id = std::stoi(word);
+        std::getline(str, word, ',');
+        badgeName = word;
+        std::getline(str, word, ',');
+        badgeQuality = word;
+
+        //fin >> id >> badgeName >> badgeQuality;
         try
         {
             if(id < 0) throw (invalidId{"Id invalid"});
@@ -118,7 +179,20 @@ int main() {
     }
 
     for (int i = 0; i < nrOfManagers; ++i) {
-        fin >> id >> managerName >> managerQuality >> managerLeague;
+        std::getline(fin, line);
+
+        std::stringstream str(line);
+
+        std::getline(str, word, ',');
+        id = std::stoi(word);
+        std::getline(str, word, ',');
+        managerName = word;
+        std::getline(str, word, ',');
+        managerQuality = word;
+        std::getline(str, word, ',');
+        managerLeague = word;
+
+        //fin >> id >> managerName >> managerQuality >> managerLeague;
         try
         {
             if(id < 0) throw (invalidId{"Id invalid"});
@@ -140,39 +214,9 @@ int main() {
 
     collection col{emptyPlayers, emptyBadges, emptyManagers};
     balance blnc{100000};
-    //pack goldPack{1000, 7, emptyPlayers, emptyBadges, emptyManagers};
-    //goldPack.open(blnc, playersPool, badgesPool, managersPool);
-    //std::cout << "Ai mai ramas cu atatia bani: " << '\n';
-    //std::cout << blnc << '\n';
-    //std::cout << "Din pachet ai obtinut: " << '\n';
-    //std::cout << goldPack << '\n';
-    //
-    //if(!goldPack.getPlayers().empty())
-    //{
-    //    col.addPlayer(goldPack.getPlayers()[0]); //aici cred ca trebuie make_shared
-    //    if(goldPack.getPlayers().size()>=2) blnc.sellPlayer( goldPack.getPlayers()[1]); //daca avem cel putin 2 jucatori in pachet
-    //                                                                                                // il vindem pe al doilea
-    //}
-    //if(!goldPack.getManager().empty())
-    //{
-    //    col.addManager(goldPack.getManager()[0]);
-    //    if(goldPack.getManager().size()>=2) blnc.sellManager(goldPack.getManager()[1]); //daca avem cel putin 2 manageri in pack
-    //                                                                                                    // il vindem pe al doilea
-    //}
-    //if(!goldPack.getBadges().empty())
-    //{
-    //    blnc.sellBadge(goldPack.getBadges()[0]);
-    //    if(goldPack.getBadges().size()>=2) col.addBadge(goldPack.getBadges()[1]); //daca avem cel putin 2 badge-uri in pack
-    //                                                                                            // il adaugam in colectie pe al doilea
-    //}
-    //
-    //std::cout << "Colectia ta dupa ce ai adaugat: \n";
-    //std::cout << col << '\n';
-    //std::cout << "Cati bani ai dupa ce ai vandut: \n";
-    //std::cout << blnc << '\n';
 
     int input, inputSellAddAll, nrOrdine, decizie, inpCol;
-    pack goldPack{1000, 5, 1, 1, emptyPlayers, emptyBadges, emptyManagers};
+    pack goldPack{7500, 5, 1, 1, emptyPlayers, emptyBadges, emptyManagers};
 
     do
     {
@@ -273,7 +317,7 @@ int main() {
             } else if (input == 1) {
                 //system("cls");
                 rlutil::cls();
-                goldPack.open(blnc, playersPool, badgesPool, managersPool);
+                goldPack.open(blnc, playersPoolGold, badgesPool, managersPool);
                 nrP = goldPack.getNrOfPlayers();
                 nrB = goldPack.getNrOfBadges();
                 nrM = goldPack.getNrOfManagers();

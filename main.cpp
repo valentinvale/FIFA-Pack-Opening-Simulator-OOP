@@ -218,7 +218,7 @@ int main() {
     collection col{emptyPlayers, emptyBadges, emptyManagers};
     balance blnc{100000};
 
-    int input, inputSellAddAll, nrOrdine, decizie, inpCol;
+    int input=0, inputSellAddAll=0, nrOrdine=0, decizie=0, inpCol=0;
     pack goldPack{7500, 5, 1, 1, emptyPlayers, emptyBadges, emptyManagers};
 
     do

@@ -3,6 +3,7 @@
 // functia de adaugat jucatori la colectie
 // functia de vanzare jucatori
 // v1.0
+
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -229,7 +230,7 @@ int main() {
         std::cout << "Apasa tasta corespunzatoare pentru a dschide pachetul dorit" << '\n' << '\n';
         std::cout << "Apasa tasta 9 pentru a vedea colectia" << '\n' << '\n';
         std::cout << "Apasa tasta 0 pentru a iesi" << '\n' << '\n';
-        std::cout << "1. Gold Pack - 5 jucatori, 1 badge si 1 manager - pret: " << goldPack.getPrice() << '\n' << '\n';
+        std::cout << "1. Gold Pack - 5 jucatori de calitate Gold, 1 badge si 1 manager - pret: " << goldPack.getPrice() << '\n' << '\n';
         std::cin >> input;
 
         try

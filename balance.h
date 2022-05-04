@@ -12,22 +12,22 @@
 #define OOP_BALANCE_H
 
 class balance{
-    int bal;
+    static int bal;
 
 public:
-    explicit balance(int bal);
+    //explicit balance(int bal);
 
     friend std::ostream &operator<<(std::ostream &os, const balance &balance);
 
     bool pay(int price);
 
-    //Metoda pentru vindere de jucator, luam jucatorul de pe pozitia i din vectorul de jucatori obtinuti din pachet
+    //Metoda pentru a vinde jucator, luam jucatorul de pe pozitia i din vectorul de jucatori obtinuti din pachet
     //la fel si pentru manageri si badge-uri
-    void sellPlayer(std::shared_ptr<player> pulledPlayer);
+    static void sellPlayer(std::shared_ptr<player> pulledPlayer);
 
-    void sellBadge(const badge& pulledBadge);
+    static void sellBadge(const badge& pulledBadge);
 
-    void sellManager(const manager& pulledManager);
+    static void sellManager(const manager& pulledManager);
 
 };
 

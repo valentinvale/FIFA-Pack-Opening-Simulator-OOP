@@ -217,7 +217,7 @@ int main() {
     std::vector<manager> emptyManagers;
 
     collection col{emptyPlayers, emptyBadges, emptyManagers};
-    balance blnc{100000};
+    balance blnc;
 
     int input=0, inputSellAddAll=0, nrOrdine=0, decizie=0, inpCol=0;
     pack goldPack{7500, 5, 1, 1, emptyPlayers, emptyBadges, emptyManagers};
@@ -262,15 +262,15 @@ int main() {
                                         if (nrOrdine > nrPCol + nrMCol + nrBCol || nrOrdine <= 0)
                                             throw (invalidInput{"Numar de ordine invalid"});
                                         else if (nrOrdine <= nrPCol) {
-                                            blnc.sellPlayer(col.getPlayers()[nrOrdine - 1]);
+                                            balance::sellPlayer(col.getPlayers()[nrOrdine - 1]);
                                             col.popPlayer(nrOrdine - 1);
                                             nrPCol--;
                                         } else if (nrOrdine <= nrPCol + nrBCol) {
-                                            blnc.sellBadge(col.getBadges()[nrOrdine - nrPCol - 1]);
+                                            balance::sellBadge(col.getBadges()[nrOrdine - nrPCol - 1]);
                                             col.popBadge(nrOrdine - nrPCol - 1);
                                             nrBCol--;
                                         } else if (nrOrdine <= nrPCol + nrBCol + nrMCol) {
-                                            blnc.sellManager(col.getManagers()[nrOrdine - nrPCol - nrBCol - 1]);
+                                            balance::sellManager(col.getManagers()[nrOrdine - nrPCol - nrBCol - 1]);
                                             col.popManager(nrOrdine - nrPCol - nrBCol - 1);
                                             nrMCol--;
                                         }
@@ -342,15 +342,15 @@ int main() {
                     try {
                         if (inputSellAddAll == 1) {
                             for (unsigned long long i = 0; i < goldPack.getPlayers().size(); ++i) {
-                                blnc.sellPlayer(goldPack.getPlayers()[i]);
+                                balance::sellPlayer(goldPack.getPlayers()[i]);
                             }
 
                             for (unsigned long long i = 0; i < goldPack.getBadges().size(); ++i) {
-                                blnc.sellBadge(goldPack.getBadges()[i]);
+                                balance::sellBadge(goldPack.getBadges()[i]);
                             }
 
                             for (unsigned long long i = 0; i < goldPack.getManagers().size(); ++i) {
-                                blnc.sellManager(goldPack.getManagers()[i]);
+                                balance::sellManager(goldPack.getManagers()[i]);
                             }
 
                             goldPack.clearPack();
@@ -379,15 +379,15 @@ int main() {
                                         if(nrOrdine > nrP + nrB + nrM || nrOrdine <= 0) throw (invalidInput{"Numar de ordine invalid"});
                                         else
                                             if (nrOrdine <= nrP) {
-                                                blnc.sellPlayer(goldPack.getPlayers()[nrOrdine - 1]);
+                                                balance::sellPlayer(goldPack.getPlayers()[nrOrdine - 1]);
                                                 goldPack.popPlayer(nrOrdine - 1);
                                                 nrP--;
                                             } else if (nrOrdine <= nrP + nrB) {
-                                                blnc.sellBadge(goldPack.getBadges()[nrOrdine - nrP - 1]);
+                                                balance::sellBadge(goldPack.getBadges()[nrOrdine - nrP - 1]);
                                                 goldPack.popBadge(nrOrdine - nrP - 1);
                                                 nrB--;
                                             } else if (nrOrdine <= nrP + nrB + nrM) {
-                                                blnc.sellManager(goldPack.getManagers()[nrOrdine - nrP - nrB - 1]);
+                                                balance::sellManager(goldPack.getManagers()[nrOrdine - nrP - nrB - 1]);
                                                 goldPack.popManager(nrOrdine - nrP - nrB - 1);
                                                 nrM--;
                                             }

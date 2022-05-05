@@ -219,8 +219,8 @@ int main() {
     collection col{emptyPlayers, emptyBadges, emptyManagers};
     balance blnc;
 
-    std::string input, nrOrdine, decizie, inpCol;
-    std::string inputSellAddAll;
+    std::string input="", nrOrdine="", decizie="", inpCol="";
+    std::string inputSellAddAll="";
     pack goldPack{7500, 5, 1, 1, emptyPlayers, emptyBadges, emptyManagers};
 
     do

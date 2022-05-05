@@ -219,7 +219,8 @@ int main() {
     collection col{emptyPlayers, emptyBadges, emptyManagers};
     balance blnc;
 
-    int input=0, inputSellAddAll=0, nrOrdine=0, decizie=0, inpCol=0;
+    std::string input, nrOrdine, decizie, inpCol;
+    std::string inputSellAddAll;
     pack goldPack{7500, 5, 1, 1, emptyPlayers, emptyBadges, emptyManagers};
 
     do
@@ -235,7 +236,7 @@ int main() {
 
         try
         {
-            if (input == 9) {
+            if (input == "9") {
                 do {
                     rlutil::cls();
                     std::cout << col << '\n';
@@ -251,27 +252,27 @@ int main() {
 
                     try
                     {
-                        if (inpCol == 3) {
+                        if (inpCol == "3") {
                             std::cin >> nrOrdine >> decizie;
                             int nrPCol = col.getPlayers().size();
                             int nrBCol = col.getBadges().size();
                             int nrMCol = col.getManagers().size();
                             try {
-                                if (decizie == 1) {
+                                if (decizie == "1") {
                                     try {
-                                        if (nrOrdine > nrPCol + nrMCol + nrBCol || nrOrdine <= 0)
+                                        if (atoi(nrOrdine.c_str()) > nrPCol + nrMCol + nrBCol || atoi(nrOrdine.c_str()) <= 0)
                                             throw (invalidInput{"Numar de ordine invalid"});
-                                        else if (nrOrdine <= nrPCol) {
-                                            balance::sellPlayer(col.getPlayers()[nrOrdine - 1]);
-                                            col.popPlayer(nrOrdine - 1);
+                                        else if (atoi(nrOrdine.c_str()) <= nrPCol) {
+                                            balance::sellPlayer(col.getPlayers()[atoi(nrOrdine.c_str()) - 1]);
+                                            col.popPlayer(atoi(nrOrdine.c_str()) - 1);
                                             nrPCol--;
-                                        } else if (nrOrdine <= nrPCol + nrBCol) {
-                                            balance::sellBadge(col.getBadges()[nrOrdine - nrPCol - 1]);
-                                            col.popBadge(nrOrdine - nrPCol - 1);
+                                        } else if (atoi(nrOrdine.c_str()) <= nrPCol + nrBCol) {
+                                            balance::sellBadge(col.getBadges()[atoi(nrOrdine.c_str()) - nrPCol - 1]);
+                                            col.popBadge(atoi(nrOrdine.c_str()) - nrPCol - 1);
                                             nrBCol--;
-                                        } else if (nrOrdine <= nrPCol + nrBCol + nrMCol) {
-                                            balance::sellManager(col.getManagers()[nrOrdine - nrPCol - nrBCol - 1]);
-                                            col.popManager(nrOrdine - nrPCol - nrBCol - 1);
+                                        } else if (atoi(nrOrdine.c_str()) <= nrPCol + nrBCol + nrMCol) {
+                                            balance::sellManager(col.getManagers()[atoi(nrOrdine.c_str()) - nrPCol - nrBCol - 1]);
+                                            col.popManager(atoi(nrOrdine.c_str()) - nrPCol - nrBCol - 1);
                                             nrMCol--;
                                         }
                                     }
@@ -279,13 +280,13 @@ int main() {
                                         std::cout << err.what() << '\n';
                                         rlutil::anykey();
                                     }
-                                } else if (decizie == 2) {
+                                } else if (decizie == "2") {
                                     try {
-                                        if (nrOrdine > nrPCol || nrOrdine <= 0)
+                                        if (atoi(nrOrdine.c_str()) > nrPCol || atoi(nrOrdine.c_str()) <= 0)
                                             throw (invalidInput{"Numar de ordine invalid"});
-                                        else if (nrOrdine <= nrPCol) {
+                                        else if (atoi(nrOrdine.c_str()) <= nrPCol) {
                                             if (blnc.pay(1000))
-                                                col.getPlayers()[nrOrdine - 1]->chemistryStyle();
+                                                col.getPlayers()[atoi(nrOrdine.c_str()) - 1]->chemistryStyle();
                                             else
                                                 std::cout << "Nu s-a putut aplica boost-ul\n";
                                         } else {
@@ -307,18 +308,18 @@ int main() {
                         }
                         else
                         {
-                            if (inpCol != 9) throw (invalidInput{"Input invalid"});
+                            if (inpCol != "9") throw (invalidInput{"Input invalid"});
                         }
                     }
                     catch (std::exception &err) {
                         std::cout << err.what() << '\n';
                         rlutil::anykey();
                     }
-                } while (inpCol != 9);
+                } while (inpCol != "9");
                 rlutil::anykey();
 
 
-            } else if (input == 1) {
+            } else if (input == "1") {
                 //system("cls");
                 rlutil::cls();
                 goldPack.open(blnc, playersPoolGold, badgesPool, managersPool);
@@ -340,7 +341,7 @@ int main() {
                             << '\n' << '\n';
                     std::cin >> inputSellAddAll;
                     try {
-                        if (inputSellAddAll == 1) {
+                        if (inputSellAddAll == "1") {
                             for (unsigned long long i = 0; i < goldPack.getPlayers().size(); ++i) {
                                 balance::sellPlayer(goldPack.getPlayers()[i]);
                             }
@@ -355,7 +356,7 @@ int main() {
 
                             goldPack.clearPack();
 
-                        } else if (inputSellAddAll == 2) {
+                        } else if (inputSellAddAll == "2") {
                             for (unsigned long long i = 0; i < goldPack.getPlayers().size(); ++i) {
                                 col.addPlayer(goldPack.getPlayers()[i]);
                             }
@@ -370,25 +371,25 @@ int main() {
 
                             goldPack.clearPack();
 
-                        } else if (inputSellAddAll == 3) {
+                        } else if (inputSellAddAll == "3") {
                             std::cin >> nrOrdine >> decizie;
                             try {
-                                if (decizie == 1) {
+                                if (decizie == "1") {
                                     try
                                     {
-                                        if(nrOrdine > nrP + nrB + nrM || nrOrdine <= 0) throw (invalidInput{"Numar de ordine invalid"});
+                                        if(atoi(nrOrdine.c_str()) > nrP + nrB + nrM || atoi(nrOrdine.c_str()) <= 0) throw (invalidInput{"Numar de ordine invalid"});
                                         else
-                                            if (nrOrdine <= nrP) {
-                                                balance::sellPlayer(goldPack.getPlayers()[nrOrdine - 1]);
-                                                goldPack.popPlayer(nrOrdine - 1);
+                                            if (atoi(nrOrdine.c_str()) <= nrP) {
+                                                balance::sellPlayer(goldPack.getPlayers()[atoi(nrOrdine.c_str()) - 1]);
+                                                goldPack.popPlayer(atoi(nrOrdine.c_str()) - 1);
                                                 nrP--;
-                                            } else if (nrOrdine <= nrP + nrB) {
-                                                balance::sellBadge(goldPack.getBadges()[nrOrdine - nrP - 1]);
-                                                goldPack.popBadge(nrOrdine - nrP - 1);
+                                            } else if (atoi(nrOrdine.c_str()) <= nrP + nrB) {
+                                                balance::sellBadge(goldPack.getBadges()[atoi(nrOrdine.c_str()) - nrP - 1]);
+                                                goldPack.popBadge(atoi(nrOrdine.c_str()) - nrP - 1);
                                                 nrB--;
-                                            } else if (nrOrdine <= nrP + nrB + nrM) {
-                                                balance::sellManager(goldPack.getManagers()[nrOrdine - nrP - nrB - 1]);
-                                                goldPack.popManager(nrOrdine - nrP - nrB - 1);
+                                            } else if (atoi(nrOrdine.c_str()) <= nrP + nrB + nrM) {
+                                                balance::sellManager(goldPack.getManagers()[atoi(nrOrdine.c_str()) - nrP - nrB - 1]);
+                                                goldPack.popManager(atoi(nrOrdine.c_str()) - nrP - nrB - 1);
                                                 nrM--;
                                             }
                                     }
@@ -397,21 +398,21 @@ int main() {
                                         std::cout << err.what() << '\n';
                                         rlutil::anykey();
                                     }
-                                } else if (decizie == 2) {
+                                } else if (decizie == "2") {
                                     try
                                     {
-                                        if (nrOrdine > nrP + nrM + nrB || nrOrdine <= 0) throw (invalidInput{"Numar de ordine invalid"});
-                                        if (nrOrdine <= nrP) {
-                                            col.addPlayer(goldPack.getPlayers()[nrOrdine - 1]);
-                                            goldPack.popPlayer(nrOrdine - 1);
+                                        if (atoi(nrOrdine.c_str()) > nrP + nrM + nrB || atoi(nrOrdine.c_str()) <= 0) throw (invalidInput{"Numar de ordine invalid"});
+                                        if (atoi(nrOrdine.c_str()) <= nrP) {
+                                            col.addPlayer(goldPack.getPlayers()[atoi(nrOrdine.c_str()) - 1]);
+                                            goldPack.popPlayer(atoi(nrOrdine.c_str()) - 1);
                                             nrP--;
-                                        } else if (nrOrdine <= nrP + nrB) {
-                                            col.addBadge(goldPack.getBadges()[nrOrdine - nrP - 1]);
-                                            goldPack.popBadge(nrOrdine - nrP - 1);
+                                        } else if (atoi(nrOrdine.c_str()) <= nrP + nrB) {
+                                            col.addBadge(goldPack.getBadges()[atoi(nrOrdine.c_str()) - nrP - 1]);
+                                            goldPack.popBadge(atoi(nrOrdine.c_str()) - nrP - 1);
                                             nrB--;
-                                        } else if (nrOrdine <= nrP + nrB + nrM) {
-                                            col.addManager(goldPack.getManagers()[nrOrdine - nrP - nrB - 1]);
-                                            goldPack.popManager(nrOrdine - nrP - nrB - 1);
+                                        } else if (atoi(nrOrdine.c_str()) <= nrP + nrB + nrM) {
+                                            col.addManager(goldPack.getManagers()[atoi(nrOrdine.c_str()) - nrP - nrB - 1]);
+                                            goldPack.popManager(atoi(nrOrdine.c_str()) - nrP - nrB - 1);
                                             nrM--;
                                         }
                                     }
@@ -431,10 +432,12 @@ int main() {
                         }
                         else throw (invalidInput{"Input invalid"});
                     }
-                    catch(std::exception& err)
+                    catch(invalidInput& err)
                     {
+
                         std::cout << err.what() << '\n';
                         rlutil::anykey();
+
                     }
                 } while (!goldPack.getPlayers().empty() || !goldPack.getBadges().empty() ||
                          !goldPack.getManagers().empty());
@@ -444,7 +447,7 @@ int main() {
             }
             else
             {
-                if(input != 0) throw (invalidInput{"Input invalid"});
+                if(input != "0") throw (invalidInput{"Input invalid"});
             }
 
         }
@@ -452,9 +455,10 @@ int main() {
         {
             std::cout << err.what() << '\n';
             rlutil::anykey();
+
         }
 
-    }while(input != 0);
+    }while(input != "0");
 
 
 

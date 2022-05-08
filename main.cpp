@@ -22,8 +22,8 @@
 
 int main() {
 
-    std::string line;
-    std::string word;
+    std::string line = " ";
+    std::string word = " ";
 
     std::ifstream fin("date.txt");
     int nrOfPlayers = 19239;

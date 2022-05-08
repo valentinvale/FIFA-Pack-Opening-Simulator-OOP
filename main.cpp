@@ -3,7 +3,6 @@
 // functia de adaugat jucatori la colectie
 // functia de vanzare jucatori
 // v1.0
-
 #include <iostream>
 #include <fstream>
 #include <vector>

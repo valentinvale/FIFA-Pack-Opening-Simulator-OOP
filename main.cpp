@@ -20,7 +20,7 @@
 void deschidePachet(pack pachet, balance &blnc, std::vector<std::shared_ptr <player>> poolPl, std::vector<badge> poolBdg, std::vector<manager> poolMngr, collection& col)
 {
     std::string inputSellAddAll=" ";
-    std::string nrOrdine=" ", decizie=" ", inpCol=" ";
+    std::string nrOrdine=" ", decizie=" ", inpCol;
     //system("cls");
     rlutil::cls();
     if(pachet.open(blnc, poolPl, poolBdg, poolMngr)) {
@@ -170,7 +170,7 @@ int main() {
     delete b;
 
     for (int i = 0; i < nrOfPlayers; ++i) {
-        int ovr = 0;
+        int ovr;
         std::getline(fin, line);
 
         std::stringstream str(line);
@@ -348,7 +348,7 @@ int main() {
     balance blnc;
 
     std::string input=" ", nrOrdine=" ", decizie=" ", inpCol=" ";
-    std::string inputSellAddAll=" ";
+    std::string inputSellAddAll;
     pack goldPack{7500, 5, 1, 1, emptyPlayers, emptyBadges, emptyManagers};
     pack premiumGoldPack{15000, 5, 1, 1, emptyPlayers, emptyBadges, emptyManagers};
     pack ultraPremiumGoldPack{50000, 10, 2, 2, emptyPlayers, emptyBadges, emptyManagers};

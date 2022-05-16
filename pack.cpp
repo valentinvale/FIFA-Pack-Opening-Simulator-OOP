@@ -40,7 +40,7 @@ std::ostream &operator<<(std::ostream &os, const pack &pack) {
     return os;
 }
 
-void pack::open(balance &blnc, std::vector<std::shared_ptr <player>> poolPl, std::vector<badge> poolBdg, std::vector<manager> poolMngr) {
+bool pack::open(balance &blnc, std::vector<std::shared_ptr <player>> poolPl, std::vector<badge> poolBdg, std::vector<manager> poolMngr) {
     //daca ne ajung banii
     if(blnc.pay(price))
     {
@@ -61,10 +61,14 @@ void pack::open(balance &blnc, std::vector<std::shared_ptr <player>> poolPl, std
             auto randomIt = Random::get(poolMngr.begin(), poolMngr.end());
             this->managers.push_back(*randomIt);
         }
+        return true;
     }
 
         //daca nu ne ajung banii
-    else std::cout << "Nu s-a putut deschide pachetul\n";
+    else {
+        std::cout << "Nu s-a putut deschide pachetul\n";
+        return false;
+    }
 
 }
 

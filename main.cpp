@@ -24,128 +24,123 @@ void deschidePachet(pack pachet, balance &blnc, std::vector<std::shared_ptr <pla
     int nrP, nrB, nrM;
     //system("cls");
     rlutil::cls();
-    pachet.open(blnc, poolPl, poolBdg, poolMngr);
-    nrP = pachet.getNrOfPlayers();
-    nrB = pachet.getNrOfBadges();
-    nrM = pachet.getNrOfManagers();
-    std::cout << "Ai mai ramas cu atatia bani: " << '\n';
-    std::cout << blnc << '\n' << '\n';
-    std::cout << "Din pachet ai obtinut: " << '\n';
+    if(pachet.open(blnc, poolPl, poolBdg, poolMngr)) {
+        nrP = pachet.getNrOfPlayers();
+        nrB = pachet.getNrOfBadges();
+        nrM = pachet.getNrOfManagers();
+        std::cout << "Ai mai ramas cu atatia bani: " << '\n';
+        std::cout << blnc << '\n' << '\n';
+        std::cout << "Din pachet ai obtinut: " << '\n';
 
-    do {
-        //system("cls");
-        rlutil::cls();
-        std::cout << pachet << '\n' << '\n';
-        std::cout << "Apasa tasta 1 pentru a vinde toate itemele" << '\n' << '\n';
-        std::cout << "Apasa tasta 2 pentru a adauga toate itemele la colectie" << '\n' << '\n';
-        std::cout
-                << "Apasa tasta 3, introdu numarul de ordine al item-ului si cifra 1 sau 2 pentru a-l vinde, respectiv a-l adauga la colectie"
-                << '\n' << '\n';
-        std::cin >> inputSellAddAll;
-        try {
-            if (inputSellAddAll == "1") {
-                for (unsigned long long i = 0; i < pachet.getPlayers().size(); ++i) {
-                    balance::sellPlayer(pachet.getPlayers()[i]);
-                }
-
-                for (unsigned long long i = 0; i < pachet.getBadges().size(); ++i) {
-                    balance::sellBadge(pachet.getBadges()[i]);
-                }
-
-                for (unsigned long long i = 0; i < pachet.getManagers().size(); ++i) {
-                    balance::sellManager(pachet.getManagers()[i]);
-                }
-
-                pachet.clearPack();
-
-            } else if (inputSellAddAll == "2") {
-                for (unsigned long long i = 0; i < pachet.getPlayers().size(); ++i) {
-                    col.addPlayer(pachet.getPlayers()[i]);
-                }
-
-                for (unsigned long long i = 0; i < pachet.getBadges().size(); ++i) {
-                    col.addBadge(pachet.getBadges()[i]);
-                }
-
-                for (unsigned long long i = 0; i < pachet.getManagers().size(); ++i) {
-                    col.addManager(pachet.getManagers()[i]);
-                }
-
-                pachet.clearPack();
-
-            } else if (inputSellAddAll == "3") {
-                std::cin >> nrOrdine >> decizie;
-                try {
-                    if (decizie == "1") {
-                        try
-                        {
-                            if(atoi(nrOrdine.c_str()) > nrP + nrB + nrM || atoi(nrOrdine.c_str()) <= 0) throw (invalidInput{"Numar de ordine invalid"});
-                            else
-                            if (atoi(nrOrdine.c_str()) <= nrP) {
-                                balance::sellPlayer(pachet.getPlayers()[atoi(nrOrdine.c_str()) - 1]);
-                                pachet.popPlayer(atoi(nrOrdine.c_str()) - 1);
-                                nrP--;
-                            } else if (atoi(nrOrdine.c_str()) <= nrP + nrB) {
-                                balance::sellBadge(pachet.getBadges()[atoi(nrOrdine.c_str()) - nrP - 1]);
-                                pachet.popBadge(atoi(nrOrdine.c_str()) - nrP - 1);
-                                nrB--;
-                            } else if (atoi(nrOrdine.c_str()) <= nrP + nrB + nrM) {
-                                balance::sellManager(pachet.getManagers()[atoi(nrOrdine.c_str()) - nrP - nrB - 1]);
-                                pachet.popManager(atoi(nrOrdine.c_str()) - nrP - nrB - 1);
-                                nrM--;
-                            }
-                        }
-                        catch(std::exception& err)
-                        {
-                            std::cout << err.what() << '\n';
-                            rlutil::anykey();
-                        }
-                    } else if (decizie == "2") {
-                        try
-                        {
-                            if (atoi(nrOrdine.c_str()) > nrP + nrM + nrB || atoi(nrOrdine.c_str()) <= 0) throw (invalidInput{"Numar de ordine invalid"});
-                            if (atoi(nrOrdine.c_str()) <= nrP) {
-                                col.addPlayer(pachet.getPlayers()[atoi(nrOrdine.c_str()) - 1]);
-                                pachet.popPlayer(atoi(nrOrdine.c_str()) - 1);
-                                nrP--;
-                            } else if (atoi(nrOrdine.c_str()) <= nrP + nrB) {
-                                col.addBadge(pachet.getBadges()[atoi(nrOrdine.c_str()) - nrP - 1]);
-                                pachet.popBadge(atoi(nrOrdine.c_str()) - nrP - 1);
-                                nrB--;
-                            } else if (atoi(nrOrdine.c_str()) <= nrP + nrB + nrM) {
-                                col.addManager(pachet.getManagers()[atoi(nrOrdine.c_str()) - nrP - nrB - 1]);
-                                pachet.popManager(atoi(nrOrdine.c_str()) - nrP - nrB - 1);
-                                nrM--;
-                            }
-                        }
-                        catch(std::exception& err)
-                        {
-                            std::cout << err.what() << '\n';
-                            rlutil::anykey();
-                        }
+        do {
+            //system("cls");
+            rlutil::cls();
+            std::cout << pachet << '\n' << '\n';
+            std::cout << "Apasa tasta 1 pentru a vinde toate itemele" << '\n' << '\n';
+            std::cout << "Apasa tasta 2 pentru a adauga toate itemele la colectie" << '\n' << '\n';
+            std::cout
+                    << "Apasa tasta 3, introdu numarul de ordine al item-ului si cifra 1 sau 2 pentru a-l vinde, respectiv a-l adauga la colectie"
+                    << '\n' << '\n';
+            std::cin >> inputSellAddAll;
+            try {
+                if (inputSellAddAll == "1") {
+                    for (unsigned long long i = 0; i < pachet.getPlayers().size(); ++i) {
+                        balance::sellPlayer(pachet.getPlayers()[i]);
                     }
-                    else throw (invalidInput{"Input invalid"});
-                }
-                catch(std::exception& err)
-                {
-                    std::cout << err.what() << '\n';
-                    rlutil::anykey();
-                }
+
+                    for (unsigned long long i = 0; i < pachet.getBadges().size(); ++i) {
+                        balance::sellBadge(pachet.getBadges()[i]);
+                    }
+
+                    for (unsigned long long i = 0; i < pachet.getManagers().size(); ++i) {
+                        balance::sellManager(pachet.getManagers()[i]);
+                    }
+
+                    pachet.clearPack();
+
+                } else if (inputSellAddAll == "2") {
+                    for (unsigned long long i = 0; i < pachet.getPlayers().size(); ++i) {
+                        col.addPlayer(pachet.getPlayers()[i]);
+                    }
+
+                    for (unsigned long long i = 0; i < pachet.getBadges().size(); ++i) {
+                        col.addBadge(pachet.getBadges()[i]);
+                    }
+
+                    for (unsigned long long i = 0; i < pachet.getManagers().size(); ++i) {
+                        col.addManager(pachet.getManagers()[i]);
+                    }
+
+                    pachet.clearPack();
+
+                } else if (inputSellAddAll == "3") {
+                    std::cin >> nrOrdine >> decizie;
+                    try {
+                        if (decizie == "1") {
+                            try {
+                                if (atoi(nrOrdine.c_str()) > nrP + nrB + nrM || atoi(nrOrdine.c_str()) <= 0)
+                                    throw (invalidInput{"Numar de ordine invalid"});
+                                else if (atoi(nrOrdine.c_str()) <= nrP) {
+                                    balance::sellPlayer(pachet.getPlayers()[atoi(nrOrdine.c_str()) - 1]);
+                                    pachet.popPlayer(atoi(nrOrdine.c_str()) - 1);
+                                    nrP--;
+                                } else if (atoi(nrOrdine.c_str()) <= nrP + nrB) {
+                                    balance::sellBadge(pachet.getBadges()[atoi(nrOrdine.c_str()) - nrP - 1]);
+                                    pachet.popBadge(atoi(nrOrdine.c_str()) - nrP - 1);
+                                    nrB--;
+                                } else if (atoi(nrOrdine.c_str()) <= nrP + nrB + nrM) {
+                                    balance::sellManager(pachet.getManagers()[atoi(nrOrdine.c_str()) - nrP - nrB - 1]);
+                                    pachet.popManager(atoi(nrOrdine.c_str()) - nrP - nrB - 1);
+                                    nrM--;
+                                }
+                            }
+                            catch (std::exception &err) {
+                                std::cout << err.what() << '\n';
+                                rlutil::anykey();
+                            }
+                        } else if (decizie == "2") {
+                            try {
+                                if (atoi(nrOrdine.c_str()) > nrP + nrM + nrB || atoi(nrOrdine.c_str()) <= 0)
+                                    throw (invalidInput{"Numar de ordine invalid"});
+                                if (atoi(nrOrdine.c_str()) <= nrP) {
+                                    col.addPlayer(pachet.getPlayers()[atoi(nrOrdine.c_str()) - 1]);
+                                    pachet.popPlayer(atoi(nrOrdine.c_str()) - 1);
+                                    nrP--;
+                                } else if (atoi(nrOrdine.c_str()) <= nrP + nrB) {
+                                    col.addBadge(pachet.getBadges()[atoi(nrOrdine.c_str()) - nrP - 1]);
+                                    pachet.popBadge(atoi(nrOrdine.c_str()) - nrP - 1);
+                                    nrB--;
+                                } else if (atoi(nrOrdine.c_str()) <= nrP + nrB + nrM) {
+                                    col.addManager(pachet.getManagers()[atoi(nrOrdine.c_str()) - nrP - nrB - 1]);
+                                    pachet.popManager(atoi(nrOrdine.c_str()) - nrP - nrB - 1);
+                                    nrM--;
+                                }
+                            }
+                            catch (std::exception &err) {
+                                std::cout << err.what() << '\n';
+                                rlutil::anykey();
+                            }
+                        } else throw (invalidInput{"Input invalid"});
+                    }
+                    catch (std::exception &err) {
+                        std::cout << err.what() << '\n';
+                        rlutil::anykey();
+                    }
+                } else throw (invalidInput{"Input invalid"});
             }
-            else throw (invalidInput{"Input invalid"});
-        }
-        catch(invalidInput& err)
-        {
+            catch (invalidInput &err) {
 
-            std::cout << err.what() << '\n';
-            rlutil::anykey();
+                std::cout << err.what() << '\n';
+                rlutil::anykey();
 
-        }
-    } while (!pachet.getPlayers().empty() || !pachet.getBadges().empty() ||
-             !pachet.getManagers().empty());
-    //system("pause");
-    //std::cout << '\n' <<"Press any key to continue" <<'\n';
-    rlutil::anykey();
+            }
+        } while (!pachet.getPlayers().empty() || !pachet.getBadges().empty() ||
+                 !pachet.getManagers().empty());
+        //system("pause");
+        //std::cout << '\n' <<"Press any key to continue" <<'\n';
+        rlutil::anykey();
+    }
+    else rlutil::anykey();
 }
 
 int main() {

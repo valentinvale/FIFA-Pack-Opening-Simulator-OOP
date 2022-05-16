@@ -51,7 +51,7 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const pack& pack);
 
     //metoda deschidere pachet
-    void open(balance &blnc, std::vector<std::shared_ptr<player>> poolPl, std::vector<badge> poolBdg, std::vector<manager> poolMngr);
+    bool open(balance &blnc, std::vector<std::shared_ptr<player>> poolPl, std::vector<badge> poolBdg, std::vector<manager> poolMngr);
 
     void clearPack();
 

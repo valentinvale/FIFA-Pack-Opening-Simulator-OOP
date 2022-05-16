@@ -6,7 +6,10 @@
 
 goalkeeper::goalkeeper(int id, const std::string &name, const std::string &team, const std::string &pos,
                        const std::string &quality, int ovr, int div, int han, int kic, int ref, int spe, int posi)
-        : player(id, name, team, pos, quality, ovr), div(div), han(han), kic(kic), ref(ref), spe(spe), posi(posi) {}
+        : player(id, name, team, pos, quality, ovr), div(div), han(han), kic(kic), ref(ref), spe(spe), posi(posi) {
+
+    if(div < 0 || han < 0 || kic < 0 || ref < 0 || spe < 0 || posi < 0) throw invalidStat("Stat invalid");
+}
 
 std::ostream &operator<<(std::ostream &os, const goalkeeper &goalkeeper) {
     goalkeeper.afis(os);

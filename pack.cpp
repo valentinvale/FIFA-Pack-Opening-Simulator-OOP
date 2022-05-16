@@ -11,6 +11,9 @@ pack::pack(int price_, int nrOfPlayers_, int nrOfBadges_, int nrOfManagers_, con
            const std::vector<manager> &managers_) : price{price_}, nrOfPlayers{nrOfPlayers_}, nrOfBadges{nrOfBadges_} , nrOfManagers{nrOfManagers_}, players{players_},
                                                     badges{badges_}, managers{managers_} {
 
+          if(price < 0) throw invalidAmount("Suma invalida");
+          if(nrOfPlayers_ < 0 || nrOfManagers_ < 0 || nrOfBadges_ < 0) throw invalidNumberOfItems("Numar de iteme invalid");
+          if(nrOfBadges_ + nrOfPlayers_ + nrOfManagers_ == 0) throw emptyPackException("Nu se poate construi un pack gol");
 //        std::cout << "constructor de initializare pack\n";
 }
 

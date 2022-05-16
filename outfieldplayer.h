@@ -8,6 +8,7 @@
 
 #include <ostream>
 #include "player.h"
+#include "error.h"
 
 class outfieldplayer : public player{
     int pac;

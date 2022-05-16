@@ -213,9 +213,8 @@ int main() {
 
             //fin >> div >> han >> kic >> ref >> spe >> posi;
             try
-            {   if(ovr < 0 || div < 0 || han < 0 || kic < 0 || ref < 0 || spe < 0 || posi < 0) throw (invalidStat{"Invalid stat"});
-                else
-                {
+            {
+
                     goalkeeper gkp{id, playerName, playerTeam, playerPosition,playerQuality, ovr, div, han, kic, ref,spe, posi};
                     if(playerQuality == "Gold") {
                         playersPoolGold.push_back(gkp.clone());
@@ -229,7 +228,6 @@ int main() {
                     else
                         playersPoolBronze.push_back((gkp.clone()));
                     playersPool.push_back(gkp.clone());
-                }
             }
             catch(std::exception& err)
             {
@@ -254,9 +252,6 @@ int main() {
             //fin >> pac >> sho >> pas >> dri >> def >> phy;
             try
             {
-                if(ovr < 0 || pac < 0 || sho < 0 || pas < 0 || dri < 0 || def < 0 || phy < 0) throw (invalidStat{"Invalid stat"});
-                else
-                {
                     outfieldplayer ofp{id, playerName, playerTeam, playerPosition, playerQuality, ovr, pac, sho, pas, dri, def, phy};
                     if(playerQuality == "Gold") {
                         playersPoolGold.push_back(ofp.clone());
@@ -270,7 +265,7 @@ int main() {
                     else
                         playersPoolBronze.push_back((ofp.clone()));
                     playersPool.push_back(ofp.clone());
-                }
+
             }
             catch(std::exception& err)
             {
@@ -295,12 +290,10 @@ int main() {
         //fin >> id >> badgeName >> badgeQuality;
         try
         {
-            if(id < 0) throw (invalidId{"Id invalid"});
-            else
-            {
+
                 badge bdg{id, badgeName, badgeQuality};
                 badgesPool.push_back(bdg);
-            }
+
         }
         catch(std::exception& err)
         {
@@ -325,12 +318,9 @@ int main() {
         //fin >> id >> managerName >> managerQuality >> managerLeague;
         try
         {
-            if(id < 0) throw (invalidId{"Id invalid"});
-            else
-            {
                 manager mngr{id, managerName, managerQuality, managerLeague};
                 managersPool.push_back(mngr);
-            }
+
         }
         catch(std::exception& err)
         {

@@ -1,6 +1,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include "error.h"
 
 #ifndef OOP_MANAGER_H
 #define OOP_MANAGER_H

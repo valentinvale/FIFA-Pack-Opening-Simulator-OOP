@@ -10,6 +10,9 @@ player::player(int id_, const std::string &name_, const std::string &team_, cons
                const std::string &quality_, int ovr_) :
                id{id_}, name{name_}, team{team_}, pos{pos_}, quality{quality_},
                ovr{ovr_} {
+
+    if(id_ < 0) throw invalidId("ID invalid");
+    if(ovr_ < 0) throw invalidStat("Stat invalid");
 //        std::cout << "constructor de initializare player\n";
 }
 

@@ -6,6 +6,7 @@ const std::string &manager::getQuality() const {return quality; }
 manager::manager(int id_, const std::string &name_, const std::string &quality_, const std::string &league_) :id{id_}, name{name_},
                                                                                                               quality{quality_}, league{league_} {
 
+            if(id_ < 0) throw invalidId("ID invalid");
 //        std::cout << "constructor de initializare manager\n";
 }
 

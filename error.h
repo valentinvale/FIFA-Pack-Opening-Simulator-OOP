@@ -19,6 +19,21 @@ public:
     explicit invalidId(const std::string& arg);
 };
 
+class invalidAmount : public invalidStat{
+public:
+    explicit invalidAmount(const std::string& arg);
+};
+
+class invalidNumberOfItems : public invalidStat{
+public:
+    explicit invalidNumberOfItems(const std::string& arg);
+};
+
+class emptyPackException : public invalidStat{
+public:
+    explicit emptyPackException(const std::string& arg);
+};
+
 //class invalidInput : public invalidStat{
 //public:
 //    explicit invalidInput(const std::string& arg);

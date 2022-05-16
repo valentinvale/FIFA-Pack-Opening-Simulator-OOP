@@ -6,6 +6,7 @@ const std::string &badge::getQuality() const {return quality; }
 
 badge::badge(int id_, const std::string &name_, const std::string &quality_) :id{id_}, name{name_}, quality{quality_} {
 
+            if(id_ < 0) throw invalidId("ID invalid");
 //        std::cout << "constructor de initializare badge\n";
 }
 

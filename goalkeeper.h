@@ -8,6 +8,7 @@
 
 #include <ostream>
 #include "player.h"
+#include "error.h"
 
 class goalkeeper : public player {
     int div;

@@ -7,7 +7,10 @@
 outfieldplayer::outfieldplayer(int id, const std::string &name, const std::string &team, const std::string &pos,
                                const std::string &quality, int ovr, int pac, int sho, int pas, int dri, int def,
                                int phy) : player(id, name, team, pos, quality, ovr), pac(pac), sho(sho), pas(pas),
-                                          dri(dri), def(def), phy(phy) {}
+                                          dri(dri), def(def), phy(phy) {
+
+    if(pac < 0 || sho < 0 || pas < 0 || dri < 0 || def < 0 || phy < 0) throw invalidStat("Stat invalid");
+}
 
 std::ostream &operator<<(std::ostream &os, const outfieldplayer &outfieldplayer) {
     outfieldplayer.afis(os);

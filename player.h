@@ -1,6 +1,7 @@
 #include <string>
 #include <memory>
 #include <utility>
+#include "error.h"
 
 #ifndef OOP_PLAYER_H
 #define OOP_PLAYER_H

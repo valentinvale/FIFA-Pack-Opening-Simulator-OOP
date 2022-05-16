@@ -8,4 +8,4 @@ invalidId::invalidId(const std::string &arg) : invalidStat{arg} {}
 
 invalidStat::invalidStat(const std::string &arg) : runtime_error{arg} {}
 
-invalidInput::invalidInput(const std::string &arg) : invalidStat{arg} {}
+//invalidInput::invalidInput(const std::string &arg) : invalidStat{arg} {}

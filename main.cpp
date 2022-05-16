@@ -21,10 +21,10 @@ void deschidePachet(pack pachet, balance &blnc, std::vector<std::shared_ptr <pla
 {
     std::string inputSellAddAll=" ";
     std::string nrOrdine=" ", decizie=" ", inpCol=" ";
-    int nrP, nrB, nrM;
     //system("cls");
     rlutil::cls();
     if(pachet.open(blnc, poolPl, poolBdg, poolMngr)) {
+        int nrP, nrB, nrM;
         nrP = pachet.getNrOfPlayers();
         nrB = pachet.getNrOfBadges();
         nrM = pachet.getNrOfManagers();

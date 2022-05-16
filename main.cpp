@@ -399,15 +399,12 @@ int main() {
                                         else if (std::stoi(nrOrdine) <= nrPCol) {
                                             balance::sellPlayer(col.getPlayers()[std::stoi(nrOrdine) - 1]);
                                             col.popPlayer(std::stoi(nrOrdine) - 1);
-                                            nrPCol--;
                                         } else if (std::stoi(nrOrdine) <= nrPCol + nrBCol) {
                                             balance::sellBadge(col.getBadges()[std::stoi(nrOrdine) - nrPCol - 1]);
                                             col.popBadge(std::stoi(nrOrdine) - nrPCol - 1);
-                                            nrBCol--;
                                         } else if (std::stoi(nrOrdine) <= nrPCol + nrBCol + nrMCol) {
                                             balance::sellManager(col.getManagers()[std::stoi(nrOrdine) - nrPCol - nrBCol - 1]);
                                             col.popManager(std::stoi(nrOrdine) - nrPCol - nrBCol - 1);
-                                            nrMCol--;
                                         }
                                 } else if (decizie == "2") {
                                         if (std::stoi(nrOrdine) > nrPCol || std::stoi(nrOrdine) <= 0)

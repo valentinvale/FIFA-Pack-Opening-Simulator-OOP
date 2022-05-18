@@ -132,6 +132,74 @@ void deschidePachet(pack pachet, balance &blnc, std::vector<std::shared_ptr <pla
     else rlutil::anykey();
 }
 
+void openColection(collection &col, balance &blnc, std::string &nrOrdine, std::string &decizie, std::string &inpCol) {
+    do {
+        rlutil::cls();
+        std::cout << col << '\n';
+        std::cout << '\n';
+        //system("pause");
+        //std::cout << '\n' <<"Press any key to continue" <<'\n';
+        //rlutil::anykey();
+        std::cout
+                << "Apasa tasta 3, introdu numarul de ordine al item-ului si cifra 1 sau 2 pentru a-l vinde, respectiv a-i aplica un boost in schimbul a 1000 de coins\n"
+                << '\n';
+        std::cout << "Apasa tasta 9 pentru a reveni la meniul principal\n" << '\n';
+        std::cin >> inpCol;
+
+
+            if (inpCol == "3") {
+                std::cin >> nrOrdine >> decizie;
+                int nrPCol = col.getPlayers().size();
+                int nrBCol = col.getBadges().size();
+                int nrMCol = col.getManagers().size();
+                    if (decizie == "1") {
+                            if (std::stoi(nrOrdine) > nrPCol + nrMCol + nrBCol || std::stoi(nrOrdine) <= 0)
+                            {
+                                std::cout << "Numar de ordine invalid" << '\n';
+                                rlutil::anykey();
+                            }
+                            else if (std::stoi(nrOrdine) <= nrPCol) {
+                                balance::sellPlayer(col.getPlayers()[std::stoi(nrOrdine) - 1]);
+                                col.popPlayer(std::stoi(nrOrdine) - 1);
+                            } else if (std::stoi(nrOrdine) <= nrPCol + nrBCol) {
+                                balance::sellBadge(col.getBadges()[std::stoi(nrOrdine) - nrPCol - 1]);
+                                col.popBadge(std::stoi(nrOrdine) - nrPCol - 1);
+                            } else if (std::stoi(nrOrdine) <= nrPCol + nrBCol + nrMCol) {
+                                balance::sellManager(col.getManagers()[std::stoi(nrOrdine) - nrPCol - nrBCol - 1]);
+                                col.popManager(std::stoi(nrOrdine) - nrPCol - nrBCol - 1);
+                            }
+                    } else if (decizie == "2") {
+                            if (std::stoi(nrOrdine) > nrPCol || std::stoi(nrOrdine) <= 0)
+                            {
+                                std::cout << "Numar de ordine invalid" << '\n';
+                                rlutil::anykey();
+                            }
+                            else if (std::stoi(nrOrdine) <= nrPCol) {
+                                if (blnc.pay(1000))
+                                    col.getPlayers()[std::stoi(nrOrdine) - 1]->chemistryStyle();
+                                else
+                                    std::cout << "Nu s-a putut aplica boost-ul\n";
+                            } else {
+                                std::cout << "Nu se poate aplica boost unui manager/badge\n";
+                            }
+
+                    } else {
+                        std::cout << "Input invalid" << '\n';
+                        rlutil::anykey();
+                    }
+            }
+            else
+            {
+                if (inpCol != "9") {
+                    std::cout << "Input invalid" << '\n';
+                    rlutil::anykey();
+                }
+            }
+        }
+     while (inpCol != "9");
+    rlutil::anykey();
+}
+
 int main() {
 
     std::string line = " ";
@@ -360,71 +428,7 @@ int main() {
         std::cin >> input;
 
             if (input == "9") {
-                do {
-                    rlutil::cls();
-                    std::cout << col << '\n';
-                    std::cout << '\n';
-                    //system("pause");
-                    //std::cout << '\n' <<"Press any key to continue" <<'\n';
-                    //rlutil::anykey();
-                    std::cout
-                            << "Apasa tasta 3, introdu numarul de ordine al item-ului si cifra 1 sau 2 pentru a-l vinde, respectiv a-i aplica un boost in schimbul a 1000 de coins\n"
-                            << '\n';
-                    std::cout << "Apasa tasta 9 pentru a reveni la meniul principal\n" << '\n';
-                    std::cin >> inpCol;
-
-
-                        if (inpCol == "3") {
-                            std::cin >> nrOrdine >> decizie;
-                            int nrPCol = col.getPlayers().size();
-                            int nrBCol = col.getBadges().size();
-                            int nrMCol = col.getManagers().size();
-                                if (decizie == "1") {
-                                        if (std::stoi(nrOrdine) > nrPCol + nrMCol + nrBCol || std::stoi(nrOrdine) <= 0)
-                                        {
-                                            std::cout << "Numar de ordine invalid" << '\n';
-                                            rlutil::anykey();
-                                        }
-                                        else if (std::stoi(nrOrdine) <= nrPCol) {
-                                            balance::sellPlayer(col.getPlayers()[std::stoi(nrOrdine) - 1]);
-                                            col.popPlayer(std::stoi(nrOrdine) - 1);
-                                        } else if (std::stoi(nrOrdine) <= nrPCol + nrBCol) {
-                                            balance::sellBadge(col.getBadges()[std::stoi(nrOrdine) - nrPCol - 1]);
-                                            col.popBadge(std::stoi(nrOrdine) - nrPCol - 1);
-                                        } else if (std::stoi(nrOrdine) <= nrPCol + nrBCol + nrMCol) {
-                                            balance::sellManager(col.getManagers()[std::stoi(nrOrdine) - nrPCol - nrBCol - 1]);
-                                            col.popManager(std::stoi(nrOrdine) - nrPCol - nrBCol - 1);
-                                        }
-                                } else if (decizie == "2") {
-                                        if (std::stoi(nrOrdine) > nrPCol || std::stoi(nrOrdine) <= 0)
-                                        {
-                                            std::cout << "Numar de ordine invalid" << '\n';
-                                            rlutil::anykey();
-                                        }
-                                        else if (std::stoi(nrOrdine) <= nrPCol) {
-                                            if (blnc.pay(1000))
-                                                col.getPlayers()[std::stoi(nrOrdine) - 1]->chemistryStyle();
-                                            else
-                                                std::cout << "Nu s-a putut aplica boost-ul\n";
-                                        } else {
-                                            std::cout << "Nu se poate aplica boost unui manager/badge\n";
-                                        }
-
-                                } else {
-                                    std::cout << "Input invalid" << '\n';
-                                    rlutil::anykey();
-                                }
-                        }
-                        else
-                        {
-                            if (inpCol != "9") {
-                                std::cout << "Input invalid" << '\n';
-                                rlutil::anykey();
-                            }
-                        }
-                    }
-                 while (inpCol != "9");
-                rlutil::anykey();
+                openColection(col, blnc, nrOrdine, decizie, inpCol);
 
 
             }

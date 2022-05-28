@@ -14,6 +14,7 @@
 #include "collection.h"
 #include "goalkeeper.h"
 #include "outfieldplayer.h"
+#include "outfieldplayer_factory.h"
 #include "rlutil.h"
 #include "error.h"
 
@@ -217,6 +218,18 @@ int main() {
     std::vector<manager> managersPool;
 
     player* b = new outfieldplayer(0, "baza", "baza", "ST", "Gold", 0, 0, 0, 0, 0, 0, 0);
+    outfieldplayer ofpl1 = outfieldplayer_factory::ofp_liga1();
+
+    try
+    {
+        [[maybe_unused]]auto& baza1 = static_cast<player&>(ofpl1);
+    }
+    catch (std::bad_cast& err)
+    {
+        std::cout << err.what() << '\n';
+        rlutil::anykey();
+    }
+
     try
     {
         [[maybe_unused]]auto& der1 = dynamic_cast<outfieldplayer&>(*b);

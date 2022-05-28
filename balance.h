@@ -21,8 +21,8 @@ public:
     balance& operator=(const balance&) = delete;
 
     static balance& get_bal(){
-        static balance bal;
-        return bal;
+        static balance blnce;
+        return blnce;
     }
 
     friend std::ostream &operator<<(std::ostream &os, const balance &balance);

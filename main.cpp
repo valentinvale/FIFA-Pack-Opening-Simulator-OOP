@@ -403,7 +403,7 @@ int main() {
     std::vector<manager> emptyManagers;
 
     collection col{emptyPlayers, emptyBadges, emptyManagers};
-    balance blnc;
+    auto& blnc = balance::get_bal();
 
     std::string input=" ", nrOrdine=" ", decizie=" ", inpCol=" ";
     pack goldPack{7500, 5, 1, 1, emptyPlayers, emptyBadges, emptyManagers};

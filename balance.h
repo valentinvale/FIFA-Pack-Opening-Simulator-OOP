@@ -13,9 +13,17 @@
 
 class balance{
     static int bal;
+    balance() = default;
 
 public:
-    //explicit balance(int bal);
+
+    balance(const balance&) = delete;
+    balance& operator=(const balance&) = delete;
+
+    static balance& get_bal(){
+        static balance bal;
+        return bal;
+    }
 
     friend std::ostream &operator<<(std::ostream &os, const balance &balance);
 

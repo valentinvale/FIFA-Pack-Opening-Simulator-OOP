@@ -219,10 +219,14 @@ int main() {
 
     player* b = new outfieldplayer(0, "baza", "baza", "ST", "Gold", 0, 0, 0, 0, 0, 0, 0);
     outfieldplayer ofpl1 = outfieldplayer_factory::ofp_liga1();
+    outfieldplayer ofpl2 = outfieldplayer_factory::ofp_liga2();
+    outfieldplayer ofpl3 = outfieldplayer_factory::ofp_liga3();
 
     try
     {
         [[maybe_unused]]auto& baza1 = static_cast<player&>(ofpl1);
+        [[maybe_unused]]auto& baza2 = static_cast<player&>(ofpl2);
+        [[maybe_unused]]auto& baza3 = static_cast<player&>(ofpl3);
     }
     catch (std::bad_cast& err)
     {

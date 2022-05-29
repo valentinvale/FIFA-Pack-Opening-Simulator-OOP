@@ -4,11 +4,11 @@
 
 #include "collection.h"
 
-collection::collection(const std::vector<std::shared_ptr <player>> &players_, const std::vector<badge> &badges_,
-                       const std::vector<manager> &managers_) : players{players_}, badges{badges_}, managers{managers_} {
+//collection::collection(const std::vector<std::shared_ptr <player>> &players_, const std::vector<badge> &badges_,
+//                       const std::vector<manager> &managers_) : players{players_}, badges{badges_}, managers{managers_} {
 
 //        std::cout << "constructor de initializare collection\n";
-}
+//}
 
 std::ostream &operator<<(std::ostream &os, const collection &collection) {
     int cc = 1;

@@ -415,7 +415,9 @@ int main() {
     std::vector<badge> emptyBadges;
     std::vector<manager> emptyManagers;
 
-    collection col{emptyPlayers, emptyBadges, emptyManagers};
+//    collection col{emptyPlayers, emptyBadges, emptyManagers};
+    collection_builder c;
+    collection col = c.players(emptyPlayers).badges(emptyBadges).managers(emptyManagers).build();
     auto& blnc = balance::get_bal();
 
     std::string input=" ", nrOrdine=" ", decizie=" ", inpCol=" ";

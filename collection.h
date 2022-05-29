@@ -1,3 +1,4 @@
+#include <utility>
 #include <vector>
 #include <string>
 #include <iostream>
@@ -19,8 +20,10 @@ class collection{
     std::vector<manager> managers;
 
 public:
-    collection(const std::vector<std::shared_ptr <player>>& players_, const std::vector<badge>& badges_,
-               const std::vector<manager>& managers_);
+//    collection(const std::vector<std::shared_ptr <player>>& players_, const std::vector<badge>& badges_,
+//               const std::vector<manager>& managers_);
+
+    collection() = default;
 
 
     friend std::ostream& operator<<(std::ostream& os, const collection& collection);
@@ -41,6 +44,34 @@ public:
     void popPlayer(int i);
     void popBadge(int i);
     void popManager(int i);
+
+    friend class collection_builder;
+
+};
+
+class collection_builder{
+private:
+    collection c;
+public:
+    collection_builder() = default;
+    collection_builder& players(std::vector<std::shared_ptr<player>> pl){
+        c.players = std::move(pl);
+        return *this;
+    }
+
+    collection_builder& badges(std::vector<badge> bd){
+        c.badges = std::move(bd);
+        return *this;
+    }
+
+    collection_builder& managers(std::vector<manager> mn){
+        c.managers = std::move(mn);
+        return *this;
+    }
+
+    collection build(){
+        return c;
+    }
 
 };
 

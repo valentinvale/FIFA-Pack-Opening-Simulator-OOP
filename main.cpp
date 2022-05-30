@@ -19,7 +19,7 @@
 #include "error.h"
 
 template <typename T>
-void mySort(std::vector<std::shared_ptr<T>>& vec){
+[[maybe_unused]] void mySort(std::vector<std::shared_ptr<T>>& vec){
     for(unsigned long long i = 0; i < vec.size()-1; i++)
         for(unsigned long long j = i+1; j < vec.size(); j++)
             if(vec[i] > vec[j]) {
@@ -27,6 +27,10 @@ void mySort(std::vector<std::shared_ptr<T>>& vec){
                 vec[i] = vec[j];
                 vec[j] = temp;
             }
+
+    for(unsigned long long i = 0; i < vec.size(); i++)
+        std::cout << *vec[i] << '\n';
+    std::cout << '\n';
 }
 
 void deschidePachet(pack pachet, balance &blnc, std::vector<std::shared_ptr <player>> poolPl, std::vector<badge> poolBdg, std::vector<manager> poolMngr, collection& col)
@@ -147,7 +151,7 @@ void deschidePachet(pack pachet, balance &blnc, std::vector<std::shared_ptr <pla
 void openColection(collection &col, balance &blnc, std::string &nrOrdine, std::string &decizie, std::string &inpCol) {
     do {
         rlutil::cls();
-        mySort<player>(col.getPlayers());
+        //mySort<player>(col.getPlayers());
         std::cout << col << '\n';
         std::cout << '\n';
         //system("pause");

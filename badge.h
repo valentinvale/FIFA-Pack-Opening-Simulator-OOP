@@ -6,7 +6,6 @@
 #ifndef OOP_BADGE_H
 #define OOP_BADGE_H
 
-
 class badge {
     int id = 0;
     std::string name;
@@ -15,10 +14,13 @@ class badge {
 
 public:
 //    const std::string& getName() const {return name; }
-    const std::string& getQuality() const;
+//    const T& getQuality() const;
+//    const std::string& getQuality() const;
+    const std::string &getQuality() const;
+
 //    int getId() const {return id; }
 
-    badge(int id_, const std::string& name_, const std::string& quality_);
+    badge(int id, const std::string &name, const std::string &quality);
 
     //badge();
 
@@ -26,7 +28,6 @@ public:
 //
 //        std::cout << "constructor de copiere badge\n";
 //    }
-
     friend std::ostream& operator<<(std::ostream& os, const badge& badge);
 
 

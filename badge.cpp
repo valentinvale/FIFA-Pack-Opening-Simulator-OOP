@@ -16,3 +16,6 @@ std::ostream &operator<<(std::ostream &os, const badge &badge) {
     os << "Name: " << badge.name << " Id: " << badge.id <<" Quality: " << badge.quality <<'\n';
     return os;
 }
+
+
+

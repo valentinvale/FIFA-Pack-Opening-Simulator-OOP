@@ -173,7 +173,8 @@ void openColection(collection &col, balance &blnc, std::string &nrOrdine, std::s
 
         std::cout
                 << "Apasa tasta 3, introdu numarul de ordine al item-ului si cifra 1 sau 2 pentru a-l vinde, \nrespectiv a-i aplica un boost in schimbul a 1000 de coins daca este jucator sau pentru a-l face activ daca este manager/badge\n"
-                << '\n';
+                << '\n'
+                << "Apasa tasta 4 pentru a afisa jucatorii in ordinea descrescatoare a ovr-ului" << '\n' << '\n';
         std::cout << "Apasa tasta 9 pentru a reveni la meniul principal\n" << '\n';
         std::cin >> inpCol;
 
@@ -224,6 +225,12 @@ void openColection(collection &col, balance &blnc, std::string &nrOrdine, std::s
                         std::cout << "Input invalid" << '\n';
                         rlutil::anykey();
                     }
+            }
+            else if(inpCol == "4"){
+                rlutil::cls();
+                std::cout << "Jucatorii in ordinea descrescatoare a ovr-ului: " << '\n' << '\n';
+                mySort<player>(col.getPlayers());
+                rlutil::anykey();
             }
             else
             {

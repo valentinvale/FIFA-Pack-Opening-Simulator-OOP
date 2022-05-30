@@ -16,3 +16,7 @@ std::ostream &operator<<(std::ostream &os, const manager &manager) {
     os << "Name: " << manager.name << " Id: " << manager.id <<" Quality: " << manager.quality << " League: " << manager.league << '\n';
     return os;
 }
+
+int manager::getId() const {
+    return id;
+}

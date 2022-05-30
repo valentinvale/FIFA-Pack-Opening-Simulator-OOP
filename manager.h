@@ -31,7 +31,7 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const manager& manager);
 
-
+    int getId() const;
 
 };
 

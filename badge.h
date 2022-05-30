@@ -22,7 +22,7 @@ public:
 
     badge(int id, const std::string &name, const std::string &quality);
 
-    //badge();
+    badge();
 
 //    badge(const badge& other) : name{other.name}, quality{other.quality}, id{other.id} {
 //
@@ -30,6 +30,7 @@ public:
 //    }
     friend std::ostream& operator<<(std::ostream& os, const badge& badge);
 
+    int getId() const;
 
 };
 

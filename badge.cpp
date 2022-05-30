@@ -10,11 +10,15 @@ badge::badge(int id_, const std::string &name_, const std::string &quality_) :id
 //        std::cout << "constructor de initializare badge\n";
 }
 
-//badge::badge() {}
+badge::badge() {}
 
 std::ostream &operator<<(std::ostream &os, const badge &badge) {
     os << "Name: " << badge.name << " Id: " << badge.id <<" Quality: " << badge.quality <<'\n';
     return os;
+}
+
+int badge::getId() const {
+    return id;
 }
 
 

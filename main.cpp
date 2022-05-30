@@ -17,6 +17,7 @@
 #include "outfieldplayer_factory.h"
 #include "rlutil.h"
 #include "error.h"
+#include "club_element.h"
 
 template <typename T>
 [[maybe_unused]] void mySort(std::vector<std::shared_ptr<T>>& vec){
@@ -148,10 +149,22 @@ void deschidePachet(pack pachet, balance &blnc, std::vector<std::shared_ptr <pla
     else rlutil::anykey();
 }
 
-void openColection(collection &col, balance &blnc, std::string &nrOrdine, std::string &decizie, std::string &inpCol) {
+void openColection(collection &col, balance &blnc, std::string &nrOrdine, std::string &decizie, std::string &inpCol, club_element<manager>& clubManager, club_element<badge>& clubBadge) {
     do {
         rlutil::cls();
         //mySort<player>(col.getPlayers());
+
+        std::cout << "Manager-ul echipei este: " << '\n';
+        if(clubManager.getElement().getId() == 0)
+            std::cout << "Nu ai ales inca un manager!" << '\n' << '\n';
+        else
+            std::cout << clubManager.afisClubElement() << '\n';
+        std::cout << "Badge-ul echipei este: " << '\n';
+        if(clubBadge.getElement().getId() == 0)
+            std::cout << "Nu ai ales inca un badge!" << '\n' << '\n';
+        else
+            std::cout << clubBadge.afisClubElement() << '\n';
+        std::cout << "---------------------------------------------------------------------------------" << '\n';
         std::cout << col << '\n';
         std::cout << '\n';
         //system("pause");
@@ -159,7 +172,7 @@ void openColection(collection &col, balance &blnc, std::string &nrOrdine, std::s
         //rlutil::anykey();
 
         std::cout
-                << "Apasa tasta 3, introdu numarul de ordine al item-ului si cifra 1 sau 2 pentru a-l vinde, respectiv a-i aplica un boost in schimbul a 1000 de coins\n"
+                << "Apasa tasta 3, introdu numarul de ordine al item-ului si cifra 1 sau 2 pentru a-l vinde, \nrespectiv a-i aplica un boost in schimbul a 1000 de coins daca este jucator sau pentru a-l face activ daca este manager/badge\n"
                 << '\n';
         std::cout << "Apasa tasta 9 pentru a reveni la meniul principal\n" << '\n';
         std::cin >> inpCol;
@@ -187,7 +200,7 @@ void openColection(collection &col, balance &blnc, std::string &nrOrdine, std::s
                                 col.popManager(std::stoi(nrOrdine) - nrPCol - nrBCol - 1);
                             }
                     } else if (decizie == "2") {
-                            if (std::stoi(nrOrdine) > nrPCol || std::stoi(nrOrdine) <= 0)
+                            if (std::stoi(nrOrdine) > nrPCol + nrMCol + nrBCol || std::stoi(nrOrdine) <= 0)
                             {
                                 std::cout << "Numar de ordine invalid" << '\n';
                                 rlutil::anykey();
@@ -197,8 +210,14 @@ void openColection(collection &col, balance &blnc, std::string &nrOrdine, std::s
                                     col.getPlayers()[std::stoi(nrOrdine) - 1]->chemistryStyle();
                                 else
                                     std::cout << "Nu s-a putut aplica boost-ul\n";
-                            } else {
-                                std::cout << "Nu se poate aplica boost unui manager/badge\n";
+                            } else if(std::stoi(nrOrdine) <= nrPCol + nrBCol){
+//                                std::cout << "Nu se poate aplica boost unui manager/badge\n";
+                                  clubBadge.setElement(col.getBadges()[std::stoi(nrOrdine) - nrPCol - 1]);
+                                col.popBadge(std::stoi(nrOrdine) - nrPCol - 1);
+                            }
+                            else if (std::stoi(nrOrdine) <= nrPCol + nrBCol + nrMCol) {
+                                clubManager.setElement(col.getManagers()[std::stoi(nrOrdine) - nrPCol - nrBCol - 1]);
+                                col.popManager(std::stoi(nrOrdine) - nrPCol - nrBCol - 1);
                             }
 
                     } else {
@@ -441,6 +460,9 @@ int main() {
     collection col = c.players(emptyPlayers).badges(emptyBadges).managers(emptyManagers).build();
     auto& blnc = balance::get_bal();
 
+    club_element<manager> clubManager;
+    club_element<badge> clubBadge;
+
     std::string input=" ", nrOrdine=" ", decizie=" ", inpCol=" ";
     pack goldPack{7500, 5, 1, 1, emptyPlayers, emptyBadges, emptyManagers};
     pack premiumGoldPack{15000, 5, 1, 1, emptyPlayers, emptyBadges, emptyManagers};
@@ -464,7 +486,7 @@ int main() {
         std::cin >> input;
 
             if (input == "9") {
-                openColection(col, blnc, nrOrdine, decizie, inpCol);
+                openColection(col, blnc, nrOrdine, decizie, inpCol, clubManager, clubBadge);
 
 
             }

@@ -50,7 +50,7 @@ void collection::addManager(const manager& pulledManager) {
 //        pulledManagers.erase(pulledManagers.begin()+i);
 }
 
-const std::vector<std::shared_ptr<player>> &collection::getPlayers() const {
+std::vector<std::shared_ptr<player>> &collection::getPlayers() {
     return players;
 }
 

@@ -28,7 +28,7 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const collection& collection);
 
-    const std::vector<std::shared_ptr<player>> &getPlayers() const;
+    std::vector<std::shared_ptr<player>> &getPlayers();
 
     const std::vector<badge> &getBadges() const;
 

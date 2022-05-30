@@ -18,6 +18,17 @@
 #include "rlutil.h"
 #include "error.h"
 
+template <typename T>
+void mySort(std::vector<std::shared_ptr<T>>& vec){
+    for(unsigned long long i = 0; i < vec.size()-1; i++)
+        for(unsigned long long j = i+1; j < vec.size(); j++)
+            if(vec[i] > vec[j]) {
+                auto temp = vec[i];
+                vec[i] = vec[j];
+                vec[j] = temp;
+            }
+}
+
 void deschidePachet(pack pachet, balance &blnc, std::vector<std::shared_ptr <player>> poolPl, std::vector<badge> poolBdg, std::vector<manager> poolMngr, collection& col)
 {
     std::string inputSellAddAll=" ";
@@ -136,11 +147,13 @@ void deschidePachet(pack pachet, balance &blnc, std::vector<std::shared_ptr <pla
 void openColection(collection &col, balance &blnc, std::string &nrOrdine, std::string &decizie, std::string &inpCol) {
     do {
         rlutil::cls();
+        mySort<player>(col.getPlayers());
         std::cout << col << '\n';
         std::cout << '\n';
         //system("pause");
         //std::cout << '\n' <<"Press any key to continue" <<'\n';
         //rlutil::anykey();
+
         std::cout
                 << "Apasa tasta 3, introdu numarul de ordine al item-ului si cifra 1 sau 2 pentru a-l vinde, respectiv a-i aplica un boost in schimbul a 1000 de coins\n"
                 << '\n';

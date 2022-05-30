@@ -60,6 +60,22 @@ int player::getOvr() const {return ovr; }
 void player::afis(std::ostream &os) const {
     os << "Nume: " << this->name << " " << "Id: " << this->id << " " "Echipa: " <<this->team << " " << "Pozitie: " << this->pos << " " << "Quality: " << this->quality << " " <<"Ovr: " << this->ovr << " ";
 }
+
+bool player::operator<(const player &rhs) const {
+    return ovr < rhs.ovr;
+}
+
+bool player::operator>(const player &rhs) const {
+    return rhs < *this;
+}
+
+bool player::operator<=(const player &rhs) const {
+    return !(rhs < *this);
+}
+
+bool player::operator>=(const player &rhs) const {
+    return !(*this < rhs);
+}
 //
 //int player::getId() const {return id; }
 //

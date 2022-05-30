@@ -49,6 +49,14 @@ public:
 
     virtual std::shared_ptr<player> clone() const = 0;
 
+    bool operator<(const player &rhs) const;
+
+    bool operator>(const player &rhs) const;
+
+    bool operator<=(const player &rhs) const;
+
+    bool operator>=(const player &rhs) const;
+
 };
 
 
